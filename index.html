@@ -320,7 +320,7 @@
   <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
   <h1>Every lead, on <span class="script">one board</span></h1>
   <div class="gold-rule"></div>
-  <p class="sub">A Trello-style pipeline that lives inside your own Google Sheet. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. Claude handles the technical part. You copy, paste, &amp; follow up.</p>
+  <p class="sub">Everything you'd run on a Trello board, added straight into the KPI sheet you already use. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. Claude handles the technical part. You copy, paste, &amp; follow up.</p>
 </header>
 
 <nav class="toc">
@@ -338,7 +338,8 @@
 <section id="what">
   <div class="kicker">01 / THE SYSTEM</div>
   <h2>What this builds for you</h2>
-  <p class="lead">Two new tabs in your Google Sheet. One is your working list of people. The other is a color-coded board where every person is a card sitting in a pipeline stage.</p>
+  <p class="lead">Two new tabs added to your current KPI sheet. One is your working list of people. The other is a color-coded board where every person is a card sitting in a pipeline stage.</p>
+  <p>It can fully replace a Trello board. Same columns-and-cards feel, no separate app to log into, &amp; your pipeline lives right beside your numbers &amp; your leads.</p>
   <div class="boardmock">
     <div class="bm-col"><div class="bm-head" style="background:#7E9C85">Lead Form Fill Out</div><div class="bm-card">Sarah M. ⚠</div><div class="bm-card">Vickie A. ⚠</div></div>
     <div class="bm-col"><div class="bm-head" style="background:#729377">Follow-Up #1</div><div class="bm-card">Em W.</div></div>
@@ -372,8 +373,9 @@
   <div class="kicker">02 / BEFORE YOU START</div>
   <h2>What you need</h2>
   <ul class="clean">
-    <li><strong>A Google account</strong> &amp; the Google Sheet where your leads land (or a fresh sheet if you're starting clean).</li>
+    <li><strong>Your current KPI sheet</strong>, the Google Sheet where your leads already land. The board gets added to it as two new tabs, so nothing about your tracker changes. (A fresh sheet works too if you're starting clean.)</li>
     <li><strong>Claude</strong> at <a href="https://claude.ai">claude.ai</a>. The free plan works.</li>
+    <li><strong>Claude connected to your Google Drive.</strong> Claude needs to be able to access your KPI sheet through your Drive so it can read your lead tab's layout during the customize step. In claude.ai it's Settings → Connectors → Google Drive.</li>
     <li><strong>The script.</strong> It's further down this page, in <a href="#script">The Script</a>. One copy button grabs the whole thing.</li>
     <li><strong>About 15 minutes.</strong> Honestly.</li>
   </ul>
@@ -389,12 +391,12 @@
   <p>Want your own stages, or want it wired to the tab where your leads arrive? Open a chat with Claude, copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
   <div class="promptbox">
     <div class="phead"><span>Prompt 1 · Customize my script</span><button class="copybtn" data-target="prompt1" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside a Google Sheet. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
+    <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside my KPI sheet in Google Sheets. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
 
 Interview me first, one question at a time:
 1. My pipeline stages, in order (I can also keep the default list). The first stage is where every new lead lands.
 2. Which stages mean "no follow-up owed", so people resting there don't get flagged as due.
-3. Whether my leads arrive on a tab in my spreadsheet automatically (from a Meta instant form, a form tool, etc.). If yes, I'll paste that tab's name & its header row (or its first two rows), and you'll work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes.
+3. Whether my leads arrive on a tab in my KPI sheet automatically (from a Meta instant form, a form tool, etc.). If yes: you have access to my Google Drive, so open my KPI sheet, find that tab, & read its header row to work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes. If you can't open my sheet, ask me to paste the tab's first two rows instead.
 4. What I want the four answer-column headers to say.
 5. How many days after a touch before the next follow-up is due (the default is 2).
 
@@ -413,7 +415,7 @@ Here's the script:
   <div class="kicker">04 / STEP TWO</div>
   <h2>Install it in your sheet</h2>
   <ol class="clean">
-    <li>Open your Google Sheet, then <strong>Extensions → Apps Script</strong>.</li>
+    <li>Open your KPI sheet, then <strong>Extensions → Apps Script</strong>.</li>
     <li>Delete whatever is in the editor. Paste your script. Press <strong>Ctrl+S</strong> (Cmd+S on a Mac).</li>
     <li>Go back to your spreadsheet &amp; <strong>reload the browser tab</strong>. Within a few seconds a new menu called <strong>Pipeline board</strong> appears next to Help.</li>
     <li>Click <strong>Pipeline board → 1. Build the board</strong>, &amp; approve the authorization (more on that below).</li>
