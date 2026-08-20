@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>The Pipeline Board Kit · Innovation with Ashley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Pinyon+Script&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #800020;
+    --forest:   #366049;
+    --cream:    #f5e6d3;
+    --gold:     #d4af37;
+    --charcoal: #36454f;
+    --card:     #faf0df;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--forest); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+  a:hover { color: var(--burgundy); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--burgundy);
+    color: var(--cream);
+    text-align: center;
+    padding: 84px 24px 72px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 26px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 68px);
+    line-height: 1.12;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .hero h1 .script {
+    font-family: 'Pinyon Script', cursive;
+    font-weight: 400;
+    font-size: clamp(48px, 8.5vw, 84px);
+    color: var(--gold);
+    display: inline-block;
+    padding: 0 6px;
+  }
+  .gold-rule {
+    width: 72px; height: 2px;
+    background: var(--gold);
+    margin: 30px auto;
+  }
+  .hero .sub {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--cream);
+    opacity: .94;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(245, 230, 211, .96);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--gold);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 26px;
+    padding: 13px 18px;
+  }
+  nav.toc a {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  nav.toc a:hover { color: var(--forest); }
+
+  /* ---------- Layout ---------- */
+  main { max-width: 800px; margin: 0 auto; padding: 24px 22px 40px; }
+  section { padding: 58px 0 6px; }
+  .kicker {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .26em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 40px);
+    color: var(--burgundy);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 23px;
+    color: var(--burgundy);
+    margin: 40px 0 12px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin: 28px 0 10px;
+  }
+  p { margin-bottom: 16px; }
+  .lead { font-size: 18px; }
+  ul.clean, ol.clean { margin: 0 0 18px 22px; }
+  ul.clean li, ol.clean li { margin-bottom: 10px; }
+  strong { color: var(--burgundy); }
+
+  /* ---------- Components ---------- */
+  .note {
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 18px;
+    margin: 20px 0 24px;
+    font-size: 15.5px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 26px 0 10px;
+  }
+  .flow .step {
+    background: var(--card);
+    border: 1px solid rgba(128, 0, 32, .22);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+  .flow .arrow { color: var(--gold); font-weight: 700; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 22px 0; }
+  .card {
+    background: var(--card);
+    border-top: 2px solid var(--gold);
+    border-radius: 0 0 12px 12px;
+    padding: 18px 20px;
+    font-size: 15px;
+  }
+  .card b { display: block; color: var(--burgundy); font-size: 15.5px; margin-bottom: 6px; }
+
+  /* board mock */
+  .boardmock {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid rgba(128, 0, 32, .18);
+    border-radius: 12px;
+    margin: 22px 0 8px;
+  }
+  .bm-col { min-width: 132px; flex: 0 0 auto; }
+  .bm-head {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #fff8ef;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .bm-card {
+    background: #fff;
+    border-radius: 6px;
+    font-size: 12.5px;
+    padding: 5px 9px;
+    margin-top: 6px;
+    color: var(--charcoal);
+    box-shadow: 0 1px 2px rgba(43, 26, 30, .14);
+  }
+  .mockcaption { font-size: 13.5px; opacity: .8; margin-bottom: 18px; }
+
+  /* prompt + code blocks */
+  .promptbox {
+    background: var(--card);
+    border: 1.5px solid var(--forest);
+    border-radius: 12px;
+    margin: 20px 0 28px;
+    overflow: hidden;
+  }
+  .promptbox .phead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: var(--forest);
+    color: var(--cream);
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .copybtn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--forest);
+    background: var(--cream);
+    border: none;
+    border-radius: 100px;
+    padding: 6px 16px;
+    cursor: pointer;
+  }
+  .copybtn:hover { background: var(--gold); color: var(--charcoal); }
+  .prompttext {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    padding: 18px 20px;
+    margin: 0;
+    color: var(--charcoal);
+  }
+  .codewrap details { border: none; background: transparent; margin: 0; }
+  .codewrap summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 20px;
+    font-weight: 600;
+    color: var(--forest);
+    font-size: 15px;
+  }
+  .codewrap summary::-webkit-details-marker { display: none; }
+  .codewrap summary::before { content: "+"; color: var(--gold); font-weight: 700; margin-right: 12px; }
+  .codewrap details[open] summary::before { content: "–"; }
+  .codewrap pre {
+    margin: 0;
+    padding: 4px 20px 20px;
+    overflow-x: auto;
+    max-height: 480px;
+    overflow-y: auto;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--charcoal);
+  }
+
+  .deep {
+    background: var(--burgundy);
+    color: var(--cream);
+    border-radius: 16px;
+    padding: 40px 34px;
+    margin: 34px 0;
+  }
+  .deep h3 { color: var(--gold); margin-top: 0; }
+  .deep strong { color: var(--gold); }
+  .deep ul { margin: 0 0 0 20px; }
+  .deep li { margin-bottom: 12px; }
+  .deep p:last-child { margin-bottom: 0; }
+  .deep.forest { background: var(--forest); }
+  .deep.forest h3 { color: var(--cream); }
+  .deep.forest strong { color: var(--gold); }
+
+  .divider { width: 100%; max-width: 800px; margin: 30px auto 0; border: none; border-top: 1px solid var(--gold); opacity: .55; }
+
+  footer {
+    background: var(--charcoal);
+    color: var(--cream);
+    text-align: center;
+    padding: 54px 24px;
+    margin-top: 70px;
+  }
+  footer .fscript {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 34px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+  footer p { font-size: 14px; opacity: .92; max-width: 520px; margin: 0 auto 8px; }
+  footer .brand { letter-spacing: .28em; text-transform: uppercase; font-size: 12px; font-weight: 600; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
+  <h1>Every lead, on <span class="script">one board</span></h1>
+  <div class="gold-rule"></div>
+  <p class="sub">A Trello-style pipeline that lives inside your own Google Sheet. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. Claude handles the technical part. You copy, paste, &amp; follow up.</p>
+</header>
+
+<nav class="toc">
+  <a href="#what">What You Get</a>
+  <a href="#need">Before You Start</a>
+  <a href="#customize">Customize</a>
+  <a href="#install">Install</a>
+  <a href="#daily">Daily Rhythm</a>
+  <a href="#script">The Script</a>
+  <a href="#fixes">Fixes &amp; Changes</a>
+</nav>
+
+<main>
+
+<section id="what">
+  <div class="kicker">01 / THE SYSTEM</div>
+  <h2>What this builds for you</h2>
+  <p class="lead">Two new tabs in your Google Sheet. One is your working list of people. The other is a color-coded board where every person is a card sitting in a pipeline stage.</p>
+  <div class="boardmock">
+    <div class="bm-col"><div class="bm-head" style="background:#7E9C85">Lead Form Fill Out</div><div class="bm-card">Sarah M. ⚠</div><div class="bm-card">Vickie A. ⚠</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#729377">Follow-Up #1</div><div class="bm-card">Em W.</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#5F836B">Follow-Up #2</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#3E6850">Sent MC FU #1</div><div class="bm-card">Phyllis R. ⚠</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#C6A664;color:#2b1a1e">Watched MC FU</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#9C3B52">Sent DP Link</div><div class="bm-card">Dana K.</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#800020">DP Sign-Up</div></div>
+    <div class="bm-col"><div class="bm-head" style="background:#8A6D2F">My Team</div><div class="bm-card">Jess T.</div></div>
+  </div>
+  <p class="mockcaption">A peek at the board. Yours shows your own stages &amp; your own people, with a live count at the top of every column.</p>
+  <div class="flow">
+    <span class="step">Lead comes in</span><span class="arrow">→</span>
+    <span class="step">Lands on the board automatically</span><span class="arrow">→</span>
+    <span class="step">You follow up</span><span class="arrow">→</span>
+    <span class="step">One dropdown moves their card</span><span class="arrow">→</span>
+    <span class="step">⚠ appears when they're due again</span>
+  </div>
+  <div class="cards">
+    <div class="card"><b>The board &amp; the cards</b>Every stage is a column. Every person is a card. Moving someone is one dropdown click, no dragging, no copy-paste, no retyping names.</div>
+    <div class="card"><b>Leads add themselves</b>New people from your lead form land at the first stage on their own, with their name, email, &amp; form answers already filled in. Duplicates get skipped.</div>
+    <div class="card"><b>Dates that stamp themselves</b>Change someone's stage &amp; the sheet records today as your last touch, then sets the next follow-up for 2 days out. You never track dates by hand.</div>
+    <div class="card"><b>A morning nudge</b>Any day someone is due, you get an email around 8 AM listing who, their stage, &amp; your notes. Nobody due, no email.</div>
+  </div>
+  <div class="note"><p>Everything runs inside your own Google account. No subscriptions, no third-party tools, nothing to pay for. Your leads never leave your sheet.</p></div>
+</section>
+
+<hr class="divider">
+
+<section id="need">
+  <div class="kicker">02 / BEFORE YOU START</div>
+  <h2>What you need</h2>
+  <ul class="clean">
+    <li><strong>A Google account</strong> &amp; the Google Sheet where your leads land (or a fresh sheet if you're starting clean).</li>
+    <li><strong>Claude</strong> at <a href="https://claude.ai">claude.ai</a>. The free plan works.</li>
+    <li><strong>The script.</strong> It's further down this page, in <a href="#script">The Script</a>. One copy button grabs the whole thing.</li>
+    <li><strong>About 15 minutes.</strong> Honestly.</li>
+  </ul>
+  <p>You do not need to know how to code. Claude does the technical part &amp; you follow the steps.</p>
+</section>
+
+<hr class="divider">
+
+<section id="customize">
+  <div class="kicker">03 / STEP ONE</div>
+  <h2>Have Claude customize it for you</h2>
+  <p>The script comes preloaded with the exact stages &amp; colors from Ashley's board. If you want it exactly like that, skip straight to <a href="#install">Install</a>.</p>
+  <p>Want your own stages, or want it wired to the tab where your leads arrive? Open a chat with Claude, copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt 1 · Customize my script</span><button class="copybtn" data-target="prompt1" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside a Google Sheet. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
+
+Interview me first, one question at a time:
+1. My pipeline stages, in order (I can also keep the default list). The first stage is where every new lead lands.
+2. Which stages mean "no follow-up owed", so people resting there don't get flagged as due.
+3. Whether my leads arrive on a tab in my spreadsheet automatically (from a Meta instant form, a form tool, etc.). If yes, I'll paste that tab's name & its header row (or its first two rows), and you'll work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes.
+4. What I want the four answer-column headers to say.
+5. How many days after a touch before the next follow-up is due (the default is 2).
+
+If I have no lead tab yet, set FORM_TABS to empty & tell me I can type people in by hand.
+If my stage list changes, adjust the colors so they still read as one progression.
+When we're done, give me back the COMPLETE script in one block, ready to paste, & tell me to continue with the Install step of the guide.
+
+Here's the script:
+[paste the full script from The Script section of this guide]</pre>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="install">
+  <div class="kicker">04 / STEP TWO</div>
+  <h2>Install it in your sheet</h2>
+  <ol class="clean">
+    <li>Open your Google Sheet, then <strong>Extensions → Apps Script</strong>.</li>
+    <li>Delete whatever is in the editor. Paste your script. Press <strong>Ctrl+S</strong> (Cmd+S on a Mac).</li>
+    <li>Go back to your spreadsheet &amp; <strong>reload the browser tab</strong>. Within a few seconds a new menu called <strong>Pipeline board</strong> appears next to Help.</li>
+    <li>Click <strong>Pipeline board → 1. Build the board</strong>, &amp; approve the authorization (more on that below).</li>
+    <li>If you wired a lead tab in Step One: click <strong>2. Add checkbox columns</strong>, then <strong>3. Turn ON automation</strong>. That last click starts the auto-import &amp; the morning email.</li>
+  </ol>
+  <div class="deep">
+    <h3>About the authorization popup</h3>
+    <p>The first time you run the menu, Google asks you to authorize the script. You may see a screen that says <strong>"Google hasn't verified this app."</strong> That warning shows up for every personal script anyone writes in their own sheet. It's yours, running in your account, touching only this spreadsheet &amp; the reminder email it sends you.</p>
+    <p>Click <strong>Advanced</strong>, then <strong>Go to (your project name)</strong>, then <strong>Allow</strong>. That's it, &amp; you only do it once.</p>
+  </div>
+  <p>When the build finishes you'll have two new tabs: <strong>Pipeline</strong> (your working list) &amp; <strong>Pipeline Board</strong> (the board itself).</p>
+</section>
+
+<hr class="divider">
+
+<section id="daily">
+  <div class="kicker">05 / STEP THREE</div>
+  <h2>The daily rhythm</h2>
+  <ul class="clean">
+    <li><strong>Moving a card is one dropdown.</strong> On the Pipeline tab, change the person's Stage. The board redraws instantly. Never edit the board tab itself; it politely warns you if you try.</li>
+    <li><strong>Dates handle themselves.</strong> Changing a stage stamps Last Touch to today &amp; Next FU to 2 days out. Booked a call for Thursday? Type Thursday's date into Next FU. A date you set always wins.</li>
+    <li><strong>DUE &amp; the ⚠.</strong> When someone's follow-up day arrives, or they've sat untouched 2+ days, their row flags DUE &amp; their card gets a ⚠. Resting stages like My Team &amp; Leads Archive show a dash instead, so finished people never nag you.</li>
+    <li><strong>New people arrive on their own.</strong> With automation on, form leads land at the first stage with their answers filled in. You can also tick the → Pipeline checkbox on a lead tab to send someone over yourself.</li>
+    <li><strong>The morning email.</strong> Around 8 AM, any day someone is due, you get the list: who, what stage, your notes. Open the sheet, work the list, close the app.</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<section id="script">
+  <div class="kicker">06 / THE SCRIPT</div>
+  <h2>The script itself</h2>
+  <p>This is the whole engine: the board builder, the auto-import, the date stamping, &amp; the reminder email. Copy it with the button, then head back to <a href="#customize">Step One</a> to customize it, or straight to <a href="#install">Install</a> to use it as-is. You can also <a href="pipeline-board-kit.gs" download>download it as a file</a>.</p>
+  <div class="promptbox codewrap">
+    <div class="phead"><span>pipeline-board-kit.gs · the full script</span><button class="copybtn" data-target="gscode" onclick="copyBlock(this)">Copy</button></div>
+    <details>
+      <summary>Show the code (you don't need to read it, just copy it)</summary>
+      <pre id="gscode"><code>/**
+ * PIPELINE BOARD KIT — a Trello-style lead pipeline inside your own Google Sheet.
+ *
+ * One script does everything:
+ *   • Builds two tabs: "Pipeline" (your working list) + "Pipeline Board" (a
+ *     color-coded kanban that redraws itself — you never edit it directly).
+ *   • Auto-imports new leads from your lead tab(s) — name, email, form answers —
+ *     landing everyone at the first stage.
+ *   • Stamps follow-up dates for you: change someone's Stage and Last Touch
+ *     becomes today, Next FU becomes +2 days. A DUE flag (and ⚠ on their card)
+ *     appears when a follow-up is overdue.
+ *   • Optional daily ~8 AM email listing everyone who's due.
+ *
+ * INSTALL (10 minutes, one time):
+ *   1. Open your Google Sheet → Extensions → Apps Script.
+ *   2. Delete whatever is in the editor, paste this whole file, press Ctrl+S.
+ *   3. Reload the spreadsheet tab in your browser.
+ *   4. Use the new "Pipeline board" menu → "1. Build the board".
+ *      Google will ask you to authorize — it's your own script, in your own
+ *      sheet, running as you. Review and allow.
+ *   5. If you filled in FORM_TABS below: menu → "2. Add checkbox columns",
+ *      then "3. Turn ON automation".
+ *
+ * EVERYTHING you might want to change lives in the CONFIG section right below.
+ * Don't edit anything past the "no edits needed below" line unless you know why.
+ */
+
+// ============================== CONFIG ======================================
+
+var PIPELINE_TAB = 'Pipeline';
+var BOARD_TAB = 'Pipeline Board';
+
+// Your stages, in order, left to right on the board. First one = where every
+// new person lands. Max 26 stages. Colors: solid = board header + stage chip,
+// text = lettering on the solid, tint = the stage's column background.
+var STAGES = [
+  { name: 'Lead Form Fill Out',          solid: '#7E9C85', text: '#FFF8EF', tint: '#EFF3F0' },
+  { name: 'Follow-Up #1',                solid: '#729377', text: '#FFF8EF', tint: '#EDF1ED' },
+  { name: 'Follow-Up #2',                solid: '#5F836B', text: '#FFF8EF', tint: '#E8EEE9' },
+  { name: 'Follow-Up #3',                solid: '#4B7259', text: '#FFF8EF', tint: '#E3EAE5' },
+  { name: 'Sent MC FU #1',               solid: '#3E6850', text: '#FFF8EF', tint: '#E0E8E3' },
+  { name: 'Sent MC FU #2',               solid: '#366049', text: '#FFF8EF', tint: '#DDE6E0' },
+  { name: 'Sent MC FU #3',               solid: '#2C4F3C', text: '#FFF8EF', tint: '#DAE3DD' },
+  { name: 'Watched MC FU',               solid: '#C6A664', text: '#2B1A1E', tint: '#F7F0DF' },
+  { name: 'Sent Next Steps',             solid: '#A98944', text: '#FFF8EF', tint: '#F3EBD6' },
+  { name: 'Sent DP Link',                solid: '#9C3B52', text: '#FFF8EF', tint: '#F5E6EA' },
+  { name: 'DP Sign-Up',                  solid: '#800020', text: '#FFF8EF', tint: '#F0DCE1' },
+  { name: 'DP Sign-Up then ?',           solid: '#6E2639', text: '#FFF8EF', tint: '#EDDDE1' },
+  { name: 'Call Needs Rescheduling',     solid: '#6B4A54', text: '#FFF8EF', tint: '#EBE3E5' },
+  { name: 'Call Scheduled',              solid: '#533945', text: '#FFF8EF', tint: '#E7DFE2' },
+  { name: 'Ghost/Canceled Call',         solid: '#3E2A32', text: '#FFF8EF', tint: '#E3DCDF' },
+  { name: 'Post-call Check-in',          solid: '#5A4632', text: '#FFF8EF', tint: '#EAE5DE' },
+  { name: 'Downline Post-call Check-in', solid: '#463628', text: '#FFF8EF', tint: '#E6E0D8' },
+  { name: 'Post-Call No-Go',             solid: '#332720', text: '#FFF8EF', tint: '#E2DCD5' },
+  { name: 'My Team',                     solid: '#8A6D2F', text: '#FFF8EF', tint: '#F1EAD8' },
+  { name: 'Leads Archive',               solid: '#857A7E', text: '#FFF8EF', tint: '#EDEAEB' },
+];
+
+// Stages where nobody owes a follow-up (Due? shows "—" unless you set a Next FU date)
+var NO_DUE_STAGES = ['My Team', 'Leads Archive', 'Post-Call No-Go', 'Call Scheduled'];
+
+// Headers for the four form-answer columns on the Pipeline tab
+var ANSWER_HEADERS = ['Called to Build?', 'Motivation', 'Watch By', 'What Spoke to Them'];
+
+// Days after a touch before the next follow-up is due
+var FU_GAP_DAYS = 2;
+
+// Your lead tab(s) — where new people appear in this spreadsheet (e.g. synced
+// from a Meta instant form). All column numbers are 1-indexed (A=1, B=2, ...).
+//   checkboxCol : empty column to hold the "→ Pipeline" checkboxes
+//   nameCol / emailCol : where the person's name and email live
+//   answerCols  : up to 4 columns of form answers (underscores become spaces)
+//   firstDataRow: 2 if the tab has a header row, 1 if data starts at the top
+//   autoImport  : true = every new row is added to the Pipeline automatically
+//                 (when automation is ON); false = you tick the checkbox yourself
+// Delete the example and add one block per lead tab. No lead tabs yet? Leave it
+// empty ( var FORM_TABS = {}; ) — you can still add people by typing them in.
+var FORM_TABS = {
+  'My Lead Tab': { checkboxCol: 21, nameCol: 18, emailCol: 17, answerCols: [13, 14, 15, 16], firstDataRow: 2, autoImport: true },
+};
+
+// ===================== no edits needed below this line ======================
+
+var LANDING_STAGE = STAGES[0].name;
+var HEADERS = ['Name', 'Email'].concat(ANSWER_HEADERS).concat(['Stage', 'Last Touch', 'Next FU', 'Due?', 'Notes']);
+var STAGE_COL = 7, TOUCH_COL = 8, NEXTFU_COL = 9, DUE_COL = 10, NOTES_COL = 11;
+var DATA_ROWS = 1000, BOARD_ROWS = 400;
+var HEADER_BG = '#366049', HEADER_TEXT = '#FFF8EF', DUE_TEXT = '#800020', DUE_BG = '#F7F0DF', INK = '#2B1A1E';
+
+// ---------- menu ----------
+
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Pipeline board')
+    .addItem('1. Build the board', 'buildPipelineBoard')
+    .addItem('2. Add checkbox columns to lead tabs', 'addCheckboxColumns')
+    .addItem('3. Turn ON automation (auto-import + daily 8 AM reminder)', 'installAutomation')
+    .addSeparator()
+    .addItem('Sync lead tabs now', 'syncNow')
+    .addItem('Send selected row to Pipeline', 'sendSelected')
+    .addItem('Turn OFF automation', 'removeAutomation')
+    .addToUi();
+}
+
+// ---------- build ----------
+
+function buildPipelineBoard() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ui = SpreadsheetApp.getUi();
+  if (STAGES.length &gt; 26) { ui.alert('Max 26 stages — trim the STAGES list.'); return; }
+  var old = [ss.getSheetByName(PIPELINE_TAB), ss.getSheetByName(BOARD_TAB)].filter(Boolean);
+  if (old.length) {
+    var a = ui.alert('Rebuild?', 'Tabs "' + PIPELINE_TAB + '" / "' + BOARD_TAB + '" already exist. Delete and rebuild them? ANYONE ON THE BOARD WILL BE ERASED.', ui.ButtonSet.YES_NO);
+    if (a !== ui.Button.YES) return;
+    old.forEach(function (s) { ss.deleteSheet(s); });
+  }
+
+  // --- Pipeline tab ---
+  var pipe = ss.insertSheet(PIPELINE_TAB);
+  pipe.setTabColor(HEADER_BG);
+  if (pipe.getMaxColumns() &gt; HEADERS.length) pipe.deleteColumns(HEADERS.length + 1, pipe.getMaxColumns() - HEADERS.length);
+  if (pipe.getMaxRows() &gt; DATA_ROWS) pipe.deleteRows(DATA_ROWS + 1, pipe.getMaxRows() - DATA_ROWS);
+  pipe.setFrozenRows(1);
+  pipe.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
+    .setBackground(HEADER_BG).setFontColor(HEADER_TEXT).setFontWeight('bold').setFontFamily('Montserrat').setVerticalAlignment('middle');
+  [180, 200, 110, 140, 140, 260, 185, 105, 105, 70, 320].forEach(function (px, i) { pipe.setColumnWidth(i + 1, px); });
+
+  var stageNames = STAGES.map(function (s) { return s.name; });
+  pipe.getRange(2, STAGE_COL, DATA_ROWS - 1, 1).setDataValidation(
+    SpreadsheetApp.newDataValidation().requireValueInList(stageNames, true).setAllowInvalid(false).build());
+  pipe.getRange(2, TOUCH_COL, DATA_ROWS - 1, 2).setNumberFormat('yyyy-mm-dd');
+
+  var pat = NO_DUE_STAGES.map(escRe).join('|');
+  pipe.getRange(2, DUE_COL).setFormula(
+    '=ARRAYFORMULA(IF($A$2:$A="","",IF($I$2:$I&lt;&gt;"",IF(TODAY()&gt;=N($I$2:$I),"DUE",""),' +
+    'IF(REGEXMATCH($G$2:$G&amp;"","^(' + pat + ')$"),"—",IF(TODAY()-N($H$2:$H)&gt;=2,"DUE","")))))');
+
+  var rules = STAGES.map(function (s) {
+    return SpreadsheetApp.newConditionalFormatRule().whenTextEqualTo(s.name)
+      .setBackground(s.solid).setFontColor(s.text).setBold(true)
+      .setRanges([pipe.getRange(2, STAGE_COL, DATA_ROWS - 1, 1)]).build();
+  });
+  rules.push(SpreadsheetApp.newConditionalFormatRule().whenTextEqualTo('DUE')
+    .setBackground(DUE_BG).setFontColor(DUE_TEXT).setBold(true)
+    .setRanges([pipe.getRange(2, DUE_COL, DATA_ROWS - 1, 1)]).build());
+  pipe.setConditionalFormatRules(rules);
+
+  pipe.getRange(2, DUE_COL, DATA_ROWS - 1, 1).protect().setWarningOnly(true)
+    .setDescription('Due? fills itself from one formula — no need to type here.');
+  pipe.getRange(1, STAGE_COL).setNote('Move someone through the pipeline by changing this dropdown — the board redraws itself. Everyone starts at "' + LANDING_STAGE + '".');
+  pipe.getRange(1, NEXTFU_COL).setNote('Optional due date — set it and Due? flips to DUE that day (always wins). Blank = due ' + FU_GAP_DAYS + ' days after last touch. With automation on, changing a Stage fills these dates for you.');
+  pipe.getRange(1, DUE_COL).setNote('Auto: DUE = follow-up owed. "—" = ' + NO_DUE_STAGES.join(', ') + '.');
+
+  // --- Board tab ---
+  var n = STAGES.length;
+  var board = ss.insertSheet(BOARD_TAB);
+  board.setTabColor(HEADER_BG);
+  if (board.getMaxColumns() &gt; n) board.deleteColumns(n + 1, board.getMaxColumns() - n);
+  if (board.getMaxRows() &gt; BOARD_ROWS) board.deleteRows(BOARD_ROWS + 1, board.getMaxRows() - BOARD_ROWS);
+  board.setFrozenRows(2);
+  board.getRange(1, 1, 1, n).setValues([stageNames]);
+  board.getRange(2, 1, 1, n).setFormulas([STAGES.map(function (_, i) {
+    return '=SUMPRODUCT(--(\'' + PIPELINE_TAB + '\'!$G$2:$G=' + colLetter(i) + '$1))';
+  })]);
+  board.getRange(3, 1, 1, n).setFormulas([STAGES.map(function (_, i) {
+    return '=IFERROR(FILTER(\'' + PIPELINE_TAB + '\'!$A$2:$A&amp;IF(\'' + PIPELINE_TAB + '\'!$J$2:$J="DUE"," ⚠",""),' +
+      '\'' + PIPELINE_TAB + '\'!$G$2:$G=' + colLetter(i) + '$1,\'' + PIPELINE_TAB + '\'!$A$2:$A&lt;&gt;""))';
+  })]);
+  STAGES.forEach(function (s, i) {
+    board.getRange(1, i + 1).setBackground(s.solid).setFontColor(s.text).setFontWeight('bold')
+      .setFontFamily('Montserrat').setFontSize(9).setHorizontalAlignment('center')
+      .setVerticalAlignment('middle').setWrap(true);
+    board.getRange(2, i + 1).setBackground(s.tint).setFontColor(s.text === INK ? '#8A6D2F' : s.solid)
+      .setFontWeight('bold').setFontFamily('Montserrat').setHorizontalAlignment('center');
+    board.getRange(3, i + 1, BOARD_ROWS - 2, 1).setBackground(s.tint).setFontColor(INK);
+  });
+  board.setColumnWidths(1, n, 160);
+  board.setRowHeight(1, 44);
+  board.setRowHeights(3, BOARD_ROWS - 2, 26);
+  board.getRange(3, 1, BOARD_ROWS - 2, n).protect().setWarningOnly(true)
+    .setDescription('The board redraws itself — move people via the Stage dropdown on the ' + PIPELINE_TAB + ' tab.');
+  board.getRange(1, 1).setNote('This board redraws itself from the ' + PIPELINE_TAB + ' tab. To move a card, change that person\'s Stage dropdown there. ⚠ = due for a follow-up. Row 2 = count per stage.');
+
+  ss.setActiveSheet(board);
+  toast('Board built! Next: menu → "2. Add checkbox columns", then "3. Turn ON automation".');
+}
+
+function addCheckboxColumns() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var done = 0;
+  Object.keys(FORM_TABS).forEach(function (title) {
+    var cfg = FORM_TABS[title];
+    var sheet = ss.getSheetByName(title);
+    if (!sheet) return;
+    while (sheet.getMaxColumns() &lt; cfg.checkboxCol) sheet.insertColumnAfter(sheet.getMaxColumns());
+    if (cfg.firstDataRow &gt; 1) {
+      sheet.getRange(1, cfg.checkboxCol).setValue('→ Pipeline').setFontWeight('bold')
+        .setFontColor(HEADER_BG).setHorizontalAlignment('center');
+    }
+    sheet.getRange(1, cfg.checkboxCol).setNote('Tick = send this person to the Pipeline at "' + LANDING_STAGE + '".');
+    sheet.getRange(cfg.firstDataRow, cfg.checkboxCol, sheet.getMaxRows() - cfg.firstDataRow + 1, 1).insertCheckboxes();
+    sheet.setColumnWidth(cfg.checkboxCol, 90);
+    done++;
+  });
+  toast(done ? 'Checkbox column ready on ' + done + ' tab(s).' : 'No FORM_TABS matched a tab name — check the CONFIG spelling.');
+}
+
+// ---------- triggers ----------
+
+function onEdit(e) {
+  if (!e || !e.range || e.range.getNumRows() !== 1 || e.range.getNumColumns() !== 1) return;
+  var sheet = e.range.getSheet();
+  var name = sheet.getName();
+  if (name === PIPELINE_TAB) { stampPipelineEdit(e, sheet); return; }
+  var cfg = FORM_TABS[name];
+  if (!cfg || e.range.getColumn() !== cfg.checkboxCol) return;
+  if (e.value !== 'TRUE' &amp;&amp; e.value !== true) return;
+  var row = e.range.getRow();
+  if (row &lt; cfg.firstDataRow) return;
+  sendRow(sheet, row, cfg);
+}
+
+function stampPipelineEdit(e, sheet) {
+  var col = e.range.getColumn();
+  var row = e.range.getRow();
+  if (row &lt; 2) return;
+  if (col === STAGE_COL) {
+    var stage = e.value || '';
+    if (!stage) return;
+    sheet.getRange(row, TOUCH_COL).setValue(dateOnly(new Date()));
+    if (NO_DUE_STAGES.indexOf(stage) &gt;= 0) sheet.getRange(row, NEXTFU_COL).clearContent();
+    else sheet.getRange(row, NEXTFU_COL).setValue(addDays(dateOnly(new Date()), FU_GAP_DAYS));
+  } else if (col === TOUCH_COL &amp;&amp; e.value) {
+    var touch = dateOnly(new Date(e.value));
+    if (isNaN(touch)) return;
+    var next = sheet.getRange(row, NEXTFU_COL).getValue();
+    if (!next || (next instanceof Date &amp;&amp; next &lt;= touch)) {
+      sheet.getRange(row, NEXTFU_COL).setValue(addDays(touch, FU_GAP_DAYS));
+    }
+  }
+}
+
+// ---------- adding people ----------
+
+function extractLead(vals, cfg) {
+  var pick = function (c) { return c &amp;&amp; vals[c - 1] != null ? String(vals[c - 1]).trim() : ''; };
+  var email = pick(cfg.emailCol);
+  var name = cfg.nameCol ? pick(cfg.nameCol) : (pick(cfg.firstNameCol) + ' ' + pick(cfg.lastNameCol)).trim();
+  if (!name || name.toLowerCase() === 'x x' || name.toLowerCase() === 'x' || name === 'full_name') name = email;
+  var answers = (cfg.answerCols || []).map(function (c) { return pick(c).replace(/_/g, ' '); });
+  return { name: name, email: email, answers: answers };
+}
+
+function existingKeys(pipe) {
+  var keys = {};
+  var last = pipe.getLastRow();
+  if (last &gt;= 2) {
+    pipe.getRange(2, 1, last - 1, 2).getValues().forEach(function (r) {
+      if (String(r[0]).trim()) keys[String(r[0]).trim().toLowerCase()] = 1;
+      if (String(r[1]).trim()) keys[String(r[1]).trim().toLowerCase()] = 1;
+    });
+  }
+  return keys;
+}
+
+function nextFreeRow(pipe) {
+  var last = pipe.getLastRow();
+  if (last &lt; 2) return 2;
+  var colA = pipe.getRange(2, 1, last - 1, 1).getValues();
+  for (var i = colA.length - 1; i &gt;= 0; i--) {
+    if (String(colA[i][0]).trim()) return i + 3;
+  }
+  return 2;
+}
+
+function sendRow(sheet, row, cfg) {
+  var lead = extractLead(sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0], cfg);
+  if (!lead.name) { toast('No name or email found on that row — nothing sent.'); return; }
+  var pipe = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PIPELINE_TAB);
+  if (!pipe) { toast('Pipeline tab not found — run "1. Build the board" first.'); return; }
+  var keys = existingKeys(pipe);
+  if (keys[lead.name.toLowerCase()] || (lead.email &amp;&amp; keys[lead.email.toLowerCase()])) {
+    toast(lead.name + ' is already on the board — not added again.');
+    return;
+  }
+  var target = nextFreeRow(pipe);
+  pipe.getRange(target, 1, 1, 7).setValues([[lead.name, lead.email,
+    lead.answers[0] || '', lead.answers[1] || '', lead.answers[2] || '', lead.answers[3] || '', LANDING_STAGE]]);
+  pipe.getRange(target, NOTES_COL).setValue('Added from "' + sheet.getName() + '" ' + fmt(new Date()));
+  sheet.getRange(row, cfg.checkboxCol).setValue(true);
+  toast(lead.name + ' → Pipeline (' + LANDING_STAGE + ')');
+}
+
+function autoSync() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(20000)) return 0;
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var pipe = ss.getSheetByName(PIPELINE_TAB);
+    if (!pipe) return 0;
+    var keys = existingKeys(pipe);
+    var added = 0;
+    Object.keys(FORM_TABS).forEach(function (title) {
+      var cfg = FORM_TABS[title];
+      if (!cfg.autoImport) return;
+      var sheet = ss.getSheetByName(title);
+      if (!sheet) return;
+      var lastRow = sheet.getLastRow();
+      if (lastRow &lt; cfg.firstDataRow) return;
+      var vals = sheet.getRange(cfg.firstDataRow, 1, lastRow - cfg.firstDataRow + 1, sheet.getLastColumn()).getValues();
+      var newRows = [], notes = [];
+      vals.forEach(function (v) {
+        var lead = extractLead(v, cfg);
+        if (!lead.email || lead.email.indexOf('@') &lt; 0) return;
+        if (keys[lead.email.toLowerCase()] || keys[lead.name.toLowerCase()]) return;
+        keys[lead.email.toLowerCase()] = 1;
+        keys[lead.name.toLowerCase()] = 1;
+        newRows.push([lead.name, lead.email,
+          lead.answers[0] || '', lead.answers[1] || '', lead.answers[2] || '', lead.answers[3] || '', LANDING_STAGE]);
+        notes.push(['Auto-added from "' + title + '" ' + fmt(new Date())]);
+      });
+      if (newRows.length) {
+        var start = nextFreeRow(pipe);
+        pipe.getRange(start, 1, newRows.length, 7).setValues(newRows);
+        pipe.getRange(start, NOTES_COL, newRows.length, 1).setValues(notes);
+        added += newRows.length;
+      }
+    });
+    if (added) toast(added + ' new lead' + (added === 1 ? '' : 's') + ' added to the Pipeline.');
+    return added;
+  } finally { lock.releaseLock(); }
+}
+
+// ---------- reminders ----------
+
+function syncNow() {
+  var added = autoSync();
+  if (!added) toast('No new leads — Pipeline is up to date.');
+}
+
+function sendSelected() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var cfg = FORM_TABS[sheet.getName()];
+  if (!cfg) { toast("This tab isn't in FORM_TABS — add it to the CONFIG first."); return; }
+  var row = sheet.getActiveRange().getRow();
+  if (row &lt; cfg.firstDataRow) { toast('Select a lead row first.'); return; }
+  sendRow(sheet, row, cfg);
+}
+
+function dailyDigest() {
+  autoSync();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var pipe = ss.getSheetByName(PIPELINE_TAB);
+  if (!pipe) return;
+  var last = pipe.getLastRow();
+  if (last &lt; 2) return;
+  var rows = pipe.getRange(2, 1, last - 1, NOTES_COL).getValues().filter(function (r) {
+    return String(r[DUE_COL - 1]) === 'DUE' &amp;&amp; String(r[0]).trim();
+  });
+  if (!rows.length) return;
+  var lines = rows.map(function (r) {
+    return '• ' + r[0] + (r[1] ? ' (' + r[1] + ')' : '') + ' — ' + r[STAGE_COL - 1] +
+      (r[NOTES_COL - 1] ? ' — ' + r[NOTES_COL - 1] : '');
+  });
+  MailApp.sendEmail(Session.getEffectiveUser().getEmail(),
+    'Follow-ups due today (' + rows.length + ')',
+    'Due on the Pipeline board this morning:\n\n' + lines.join('\n') + '\n\nOpen the board: ' + ss.getUrl());
+}
+
+function installAutomation() {
+  removeAutomation(true);
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  ScriptApp.newTrigger('autoSync').forSpreadsheet(ss).onChange().create();
+  ScriptApp.newTrigger('dailyDigest').timeBased().atHour(8).everyDays(1).create();
+  var added = autoSync();
+  toast('Automation ON — auto-import live, daily reminder ~8 AM.' + (added ? ' Imported ' + added + ' waiting lead(s).' : ''));
+}
+
+function removeAutomation(silent) {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    var fn = t.getHandlerFunction();
+    if (fn === 'dailyDigest' || fn === 'autoSync') ScriptApp.deleteTrigger(t);
+  });
+  if (silent !== true) toast('Automation OFF — checkboxes and stage-stamping still work.');
+}
+
+// ---------- helpers ----------
+
+function toast(msg) { SpreadsheetApp.getActiveSpreadsheet().toast(msg, 'Pipeline board', 6); }
+function fmt(d) { return Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd'); }
+function dateOnly(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function colLetter(i) { return String.fromCharCode(65 + i); }
+function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;'); }
+</code></pre>
+    </details>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="fixes">
+  <div class="kicker">07 / WHEN LIFE HAPPENS</div>
+  <h2>Fixes &amp; changes</h2>
+  <h3>Something's not working</h3>
+  <p>Don't troubleshoot alone. Paste this to Claude along with your installed script &amp; what you're seeing:</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt 2 · Troubleshoot</span><button class="copybtn" data-target="prompt2" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt2">My Google Sheets pipeline board script isn't behaving. Here's the full script I installed: [paste it]. Here's what happened: [describe it. Include any red error text from Extensions → Apps Script → Executions, what tab you were on, & what you clicked]. Walk me through fixing it step by step. If the fix means editing the script, give me the complete corrected script in one block.</pre>
+  </div>
+  <h3>Changing your stages later</h3>
+  <p>Your stages live in the CONFIG block at the top of the script, so they're easy to change. One thing to know first: rebuilding the board erases the people on it, so Claude will walk you through saving your list before anything else.</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt 3 · Restage my board</span><button class="copybtn" data-target="prompt3" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt3">Here's my installed pipeline board script: [paste it]. I want to change my stages to: [new list]. Update the CONFIG (stages, colors as a sensible progression, & the no-follow-up list if needed) & give me back the complete script. Then tell me the safe order of operations. I know rebuilding erases the people on the board, so first walk me through copying my Pipeline rows somewhere safe, then rebuilding, then pasting my people back & fixing any stage names that no longer exist.</pre>
+  </div>
+  <div class="deep forest">
+    <h3>Stuck anyway?</h3>
+    <p>Message Ashley. Seriously. Five minutes of asking beats an hour of fighting a spreadsheet, &amp; if something in this guide didn't make sense, she wants to know so it gets fixed for the next person.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="fscript">you've got this</span>
+  <p>Set it up once, then let the board do the remembering. Your only job is the follow-up itself: show up, be human, &amp; keep going.</p>
+  <div class="brand">Ashley Marie Innovation</div>
+</footer>
+
+<script>
+function copyBlock(btn) {
+  var el = document.getElementById(btn.dataset.target);
+  var text = el.innerText;
+  navigator.clipboard.writeText(text).then(function () {
+    var old = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(function () { btn.textContent = old; }, 1600);
+  });
+}
+</script>
+
+</body>
+</html>
