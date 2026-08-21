@@ -417,7 +417,7 @@ Here's the script:
   <h2>Install it in your sheet</h2>
   <ol class="clean">
     <li>Open your KPI sheet, then <strong>Extensions → Apps Script</strong>.</li>
-    <li>Delete whatever is in the editor. Paste your script. Press <strong>Ctrl+S</strong> (Cmd+S on a Mac).</li>
+    <li>Click into the code area &amp; delete whatever is there, including the little "function myFunction" placeholder. Then paste your script <strong>with the keyboard</strong>: Ctrl+V on Windows, Cmd+V on a Mac. Heads up: the right-click Paste menu often does nothing inside the script editor, so if a paste "isn't working", switch to the keyboard &amp; it will. Press <strong>Ctrl+S</strong> (Cmd+S) to save.</li>
     <li>Go back to your spreadsheet &amp; <strong>reload the browser tab</strong>. Within a few seconds a new menu called <strong>Pipeline board</strong> appears next to Help.</li>
     <li>Click <strong>Pipeline board → 1. Build the board</strong>, &amp; approve the authorization (more on that below).</li>
     <li>If you wired a lead tab in Step One: click <strong>2. Add checkbox columns</strong>, then <strong>3. Turn ON automation</strong>. That last click starts the auto-import &amp; the morning email, &amp; it also imports every lead already sitting on your lead tab. The people you have now land on the board in that same click; nothing gets copied over by hand.</li>
@@ -458,6 +458,7 @@ Here's the script:
   <div class="kicker">06 / THE SCRIPT</div>
   <h2>The script itself</h2>
   <p>This is the whole engine: the board builder, the auto-import, the date stamping, &amp; the reminder email. Copy it with the button, then head back to <a href="#customize">Step One</a> to customize it, or straight to <a href="#install">Install</a> to use it as-is. You can also <a href="pipeline-board-kit.gs" download>download it as a file</a>.</p>
+  <p>Two rescue moves if copying gives you grief: if the button doesn't flip to "Copied!", download the file, open it in Notepad (TextEdit on a Mac), select all &amp; copy from there. &amp; when you paste into the script editor, use the keyboard (Ctrl+V, or Cmd+V on a Mac); the right-click Paste menu often does nothing in there.</p>
   <div class="promptbox codewrap">
     <div class="phead"><span>pipeline-board-kit.gs · the full script</span><button class="copybtn" data-target="gscode" onclick="copyBlock(this)">Copy</button></div>
     <details>
@@ -896,11 +897,29 @@ function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;'); }
 function copyBlock(btn) {
   var el = document.getElementById(btn.dataset.target);
   var text = el.innerText;
-  navigator.clipboard.writeText(text).then(function () {
+  var flash = function (label) {
     var old = btn.textContent;
-    btn.textContent = 'Copied!';
-    setTimeout(function () { btn.textContent = old; }, 1600);
-  });
+    btn.textContent = label;
+    setTimeout(function () { btn.textContent = old; }, 2000);
+  };
+  var fallback = function () {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    flash(ok ? 'Copied!' : 'Copy failed');
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { flash('Copied!'); }, fallback);
+  } else {
+    fallback();
+  }
 }
 </script>
 
