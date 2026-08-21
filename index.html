@@ -327,9 +327,9 @@
   <a href="#what">What You Get</a>
   <a href="#need">Before You Start</a>
   <a href="#copy">Get Your Copy</a>
-  <a href="#customize">Customize</a>
   <a href="#install">Existing Sheet</a>
   <a href="#daily">Daily Rhythm</a>
+  <a href="#customize">Customize</a>
   <a href="#script">The Script</a>
   <a href="#fixes">Fixes &amp; Changes</a>
 </nav>
@@ -377,7 +377,7 @@
     <li><strong>A Google account.</strong> For the main copy-and-go path, that's honestly the whole list.</li>
     <li><strong>Two minutes.</strong> The template install below is one click plus a rename.</li>
     <li><strong>Only if you customize</strong> (your own stages, wiring your instant-form tab, importing old leads): <strong>Claude</strong> at <a href="https://claude.ai">claude.ai</a>. The free plan works, &amp; everything happens in the regular Claude chat, in your browser or the Claude app. You do not need Claude Code or Cowork for any of this. Connect Claude to your Google Drive first (Settings → Connectors → Google Drive) so it can access your KPI sheet &amp; read your lead tab's layout.</li>
-    <li><strong>Advanced lane only:</strong> the script itself, further down this page in <a href="#script">The Script</a>, for adding the kit to an existing KPI sheet.</li>
+    <li><strong>Existing-sheet lane only:</strong> the script itself, further down this page in <a href="#script">The Script</a>, for adding the kit to an existing KPI sheet.</li>
   </ul>
   <p>You do not need to know how to code. Claude does the technical part &amp; you follow the steps.</p>
 </section>
@@ -389,50 +389,23 @@
   <h2>Make your copy &amp; go</h2>
   <p class="lead">The whole board, engine included, lives in a ready-made template. You don't install anything.</p>
   <div class="note">
-    <p><strong>Bringing your leads with you?</strong> Auto-importing from an instant-form tab &amp; pulling in your old Trello list are covered in <a href="#customize">Customize</a>, right after you make your copy. The board works fully by hand from minute one either way.</p>
+    <p><strong>Bringing your leads with you?</strong> Auto-importing from an instant-form tab &amp; pulling in your old Trello list are covered in <a href="#customize">Customize</a>, near the end of this guide. The board works fully by hand from minute one either way.</p>
     <p><strong>Rather have the board inside the KPI tracker sheet you already use</strong> instead of a fresh copy? Skip this section &amp; follow <a href="#install">Add it to your existing KPI sheet</a>.</p>
   </div>
   <ol class="clean">
     <li>Open the <a href="https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy"><strong>Pipeline Board Kit template</strong></a>. Google shows a <strong>Make a copy</strong> button. Click it.</li>
     <li>That's the install. The sheet that opens is yours: the board is already built, the engine is already inside, &amp; nothing in it reports back to anyone. Rename it whatever you like.</li>
     <li>Add your people on the <strong>Pipeline</strong> tab &amp; start moving them with the Stage dropdown. The <strong>Form Q1 to Q4</strong> columns hold instant-form answers; every form asks different questions, so type your own questions right over those four headers.</li>
-    <li>Want the daily "who's due" email? <strong>Pipeline board menu → 3. Turn ON automation</strong>, then approve Google's permission popup. It may say "Google hasn't verified this app"; that's your own copy's script asking. Click Advanced → Go to → Allow. (Full explanation in <a href="#install">the advanced section</a>.)</li>
+    <li>Want the daily "who's due" email? <strong>Pipeline board menu → 3. Turn ON automation</strong>, then approve Google's permission popup. It may say "Google hasn't verified this app"; that's your own copy's script asking. Click Advanced → Go to → Allow. (Full explanation in <a href="#install">the next section</a>.)</li>
   </ol>
 </section>
 
-<hr class="divider">
 
-<section id="customize">
-  <div class="kicker">04 / CUSTOMIZE (OPTIONAL)</div>
-  <h2>Have Claude customize it for you</h2>
-  <p>Your copy arrives with Ashley's stages &amp; colors. Happy with those? Skip this whole section. &amp; renaming the four answer-column headers needs no Claude either; just type over them on the sheet.</p>
-  <p>For deeper changes (your own stages, wiring the tab where your instant-form leads land, importing your old Trello list): open a normal Claude chat (the same place you'd ask Claude anything), copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
-  <p>To install the customized version into your copied sheet: <strong>Extensions → Apps Script</strong>, select everything in the editor, paste Claude's version over it, save (Ctrl+S, Cmd+S on a Mac), then <strong>Pipeline board menu → 1. Build the board</strong> &amp; answer yes to the rebuild. Do this before loading real people on, since rebuilding clears the board.</p>
-  <div class="promptbox">
-    <div class="phead"><span>Prompt 1 · Customize my script</span><button class="copybtn" data-target="prompt1" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside my KPI sheet in Google Sheets. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
-
-Interview me first, one question at a time:
-1. My pipeline stages, in order (I can also keep the default list). The first stage is where every new lead lands.
-2. Which stages mean "no follow-up owed", so people resting there don't get flagged as due.
-3. Whether my leads arrive on a tab in my KPI sheet automatically (from a Meta instant form, a form tool, etc.). If yes: you have access to my Google Drive, so open my KPI sheet, find that tab, & read its header row to work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes. If you can't open my sheet, ask me to paste the tab's first two rows instead.
-4. What I want the four answer-column headers to say.
-5. How many days after a touch before the next follow-up is due (the default is 2).
-6. Whether I already have leads somewhere else right now, like a Trello board, another spreadsheet, or my notes. If yes: once the script is done, ask me to paste that list in whatever format I have. Turn it into rows I can paste straight into the Pipeline tab, 8 columns in this order: Name, Email, the four answer columns (blank is fine), Stage (match each person to the closest stage in my new pipeline), Last Touch (leave blank so everyone flags as due for a check-in). Tell me to paste them starting in column A of the first empty row, & warn me never to type or paste anything into the Due? column.
-
-If I have no lead tab yet, set FORM_TABS to empty & tell me I can type people in by hand.
-If my stage list changes, adjust the colors so they still read as one progression.
-When we're done, give me back the COMPLETE script in one block, ready to paste, & tell me to continue with the Install step of the guide.
-
-Here's the script:
-[paste the full script from The Script section of this guide]</pre>
-  </div>
-</section>
 
 <hr class="divider">
 
 <section id="install">
-  <div class="kicker">05 / ADVANCED</div>
+  <div class="kicker">04 / EXISTING SHEET</div>
   <h2>Add it to your existing KPI sheet</h2>
   <p>Already have a KPI sheet your leads flow into, &amp; want the board living right beside them instead of in a fresh copy? Install the engine directly. This is the one lane with a paste in it.</p>
   <ol class="clean">
@@ -461,7 +434,7 @@ Here's the script:
 <hr class="divider">
 
 <section id="daily">
-  <div class="kicker">06 / EVERY DAY</div>
+  <div class="kicker">05 / EVERY DAY</div>
   <h2>The daily rhythm</h2>
   <ul class="clean">
     <li><strong>Moving a card is one dropdown.</strong> On the Pipeline tab, change the person's Stage. The board redraws instantly. Never edit the board tab itself; it politely warns you if you try.</li>
@@ -474,10 +447,39 @@ Here's the script:
 
 <hr class="divider">
 
+<section id="customize">
+  <div class="kicker">06 / CUSTOMIZE (OPTIONAL)</div>
+  <h2>Have Claude customize it for you</h2>
+  <p>Your copy arrives with Ashley's stages &amp; colors. Happy with those? Skip this whole section. &amp; renaming the four answer-column headers needs no Claude either; just type over them on the sheet.</p>
+  <p>For deeper changes (your own stages, wiring the tab where your instant-form leads land, importing your old Trello list): open a normal Claude chat (the same place you'd ask Claude anything), copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
+  <p>To install the customized version into your copied sheet: <strong>Extensions → Apps Script</strong>, select everything in the editor, paste Claude's version over it, save (Ctrl+S, Cmd+S on a Mac), then <strong>Pipeline board menu → 1. Build the board</strong> &amp; answer yes to the rebuild. Do this before loading real people on, since rebuilding clears the board.</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt 1 · Customize my script</span><button class="copybtn" data-target="prompt1" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside my KPI sheet in Google Sheets. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
+
+Interview me first, one question at a time:
+1. My pipeline stages, in order (I can also keep the default list). The first stage is where every new lead lands.
+2. Which stages mean "no follow-up owed", so people resting there don't get flagged as due.
+3. Whether my leads arrive on a tab in my KPI sheet automatically (from a Meta instant form, a form tool, etc.). If yes: you have access to my Google Drive, so open my KPI sheet, find that tab, & read its header row to work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes. If you can't open my sheet, ask me to paste the tab's first two rows instead.
+4. What I want the four answer-column headers to say.
+5. How many days after a touch before the next follow-up is due (the default is 2).
+6. Whether I already have leads somewhere else right now, like a Trello board, another spreadsheet, or my notes. If yes: once the script is done, ask me to paste that list in whatever format I have. Turn it into rows I can paste straight into the Pipeline tab, 8 columns in this order: Name, Email, the four answer columns (blank is fine), Stage (match each person to the closest stage in my new pipeline), Last Touch (leave blank so everyone flags as due for a check-in). Tell me to paste them starting in column A of the first empty row, & warn me never to type or paste anything into the Due? column.
+
+If I have no lead tab yet, set FORM_TABS to empty & tell me I can type people in by hand.
+If my stage list changes, adjust the colors so they still read as one progression.
+When we're done, give me back the COMPLETE script in one block, ready to paste, & tell me to continue with the Install step of the guide.
+
+Here's the script:
+[paste the full script from The Script section of this guide]</pre>
+  </div>
+</section>
+
+<hr class="divider">
+
 <section id="script">
   <div class="kicker">07 / THE SCRIPT</div>
   <h2>The script itself</h2>
-  <p>Template users: this exact engine is already inside your copy, so you only need this section for the customize prompt or the advanced lane.</p>
+  <p>Template users: this exact engine is already inside your copy, so you only need this section for the customize prompt or the existing-sheet lane.</p>
   <p>This is the whole engine: the board builder, the auto-import, the date stamping, &amp; the reminder email. Copy it with the button, then head back to <a href="#customize">Step One</a> to customize it, or straight to <a href="#install">Install</a> to use it as-is. You can also <a href="pipeline-board-kit.gs" download>download it as a file</a>.</p>
   <p>Two rescue moves if copying gives you grief: if the button doesn't flip to "Copied!", download the file, open it in Notepad (TextEdit on a Mac), select all &amp; copy from there. &amp; when you paste into the script editor, use the keyboard (Ctrl+V, or Cmd+V on a Mac); the right-click Paste menu often does nothing in there.</p>
   <div class="promptbox codewrap">
