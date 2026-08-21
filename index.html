@@ -407,7 +407,17 @@
 <section id="install">
   <div class="kicker">04 / EXISTING SHEET</div>
   <h2>Add it to your existing KPI sheet</h2>
-  <p>Already have a KPI sheet your leads flow into, &amp; want the board living right beside them instead of in a fresh copy? Install the engine directly. This is the one lane with a paste in it.</p>
+  <p>Already have a KPI sheet your leads flow into, &amp; want the board living right beside them instead of in a fresh copy? Two ways, &amp; the first one has no code in it at all.</p>
+  <h3>Option A: copy the tabs over (no code)</h3>
+  <p>The board itself (columns, colors, the Stage dropdown, the DUE flags &amp; the ⚠) is all formulas &amp; formatting, so the two tabs can move into your tracker like any other sheets:</p>
+  <ol class="clean">
+    <li><a href="https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy">Make your copy of the template</a> first, if you haven't already.</li>
+    <li>In your copy, right-click the <strong>Pipeline</strong> tab at the bottom → <strong>Copy to → Existing spreadsheet</strong> → pick your KPI tracker.</li>
+    <li>Do the same for the <strong>Pipeline Board</strong> tab.</li>
+    <li>Open your KPI tracker &amp; rename the two new tabs: "Copy of Pipeline" becomes <strong>Pipeline</strong>, "Copy of Pipeline Board" becomes <strong>Pipeline Board</strong>. The renames matter; they're how the board's formulas find each other, &amp; any #REF! errors vanish once both names are right.</li>
+  </ol>
+  <p>What Option A doesn't bring: the engine. Google attaches scripts to a spreadsheet, not to its tabs, so the self-stamping dates, the checkbox sending, the instant-form auto-import &amp; the morning email stay behind. You'd move stages with the dropdown &amp; type Last Touch dates yourself; the DUE flags &amp; ⚠ still work off whatever dates you enter. Want the automation too? That's Option B.</p>
+  <h3>Option B: install the full engine (one paste)</h3>
   <ol class="clean">
     <li>Open your KPI sheet, then <strong>Extensions → Apps Script</strong>.</li>
     <li>Click into the code area &amp; delete whatever is there, including the little "function myFunction" placeholder. Then paste your script <strong>with the keyboard</strong>: Ctrl+V on Windows, Cmd+V on a Mac. Heads up: the right-click Paste menu often does nothing inside the script editor, so if a paste "isn't working", switch to the keyboard &amp; it will. If even the keyboard does nothing, check two things: you clicked in the big code area itself, so there's a blinking cursor there (clicking Code.gs in the left sidebar isn't enough), &amp; the clipboard actually has the script (paste into the address bar of a new tab to test; if nothing appears, go back to the guide &amp; hit Copy again, watching for the "Copied!" flash). On a Mac the browser's menu bar <strong>Edit → Paste</strong> always works, even when Cmd+V is ignored. Press <strong>Ctrl+S</strong> (Cmd+S) to save.</li>
