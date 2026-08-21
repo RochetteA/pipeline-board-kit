@@ -60,8 +60,10 @@ var STAGES = [
 // Stages where nobody owes a follow-up (Due? shows "—" unless you set a Next FU date)
 var NO_DUE_STAGES = ['My Team', 'Leads Archive', 'Post-Call No-Go', 'Call Scheduled'];
 
-// Headers for the four form-answer columns on the Pipeline tab
-var ANSWER_HEADERS = ['Called to Build?', 'Motivation', 'Watch By', 'What Spoke to Them'];
+// Headers for the four form-answer columns on the Pipeline tab. Generic on
+// purpose, since everyone's instant form asks different questions. You can just
+// type your real questions over these four header cells on the sheet later.
+var ANSWER_HEADERS = ['Form Q1', 'Form Q2', 'Form Q3', 'Form Q4'];
 
 // Days after a touch before the next follow-up is due
 var FU_GAP_DAYS = 2;
@@ -150,6 +152,7 @@ function buildPipelineBoard() {
   pipe.getRange(1, STAGE_COL).setNote('Move someone through the pipeline by changing this dropdown — the board redraws itself. Everyone starts at "' + LANDING_STAGE + '".');
   pipe.getRange(1, NEXTFU_COL).setNote('Optional due date — set it and Due? flips to DUE that day (always wins). Blank = due ' + FU_GAP_DAYS + ' days after last touch. With automation on, changing a Stage fills these dates for you.');
   pipe.getRange(1, DUE_COL).setNote('Auto: DUE = follow-up owed. "—" = ' + NO_DUE_STAGES.join(', ') + '.');
+  pipe.getRange(1, 3).setNote('Answer columns from your instant form. The headers are generic because every form asks different questions. Type your own questions right over these four header cells, no code changes needed.');
 
   // --- Board tab ---
   var n = STAGES.length;

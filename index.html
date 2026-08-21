@@ -320,14 +320,15 @@
   <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
   <h1>Every lead, on <span class="script">one board</span></h1>
   <div class="gold-rule"></div>
-  <p class="sub">Everything you'd run on a Trello board, added straight into the KPI sheet you already use. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. Claude handles the technical part. You copy, paste, &amp; follow up.</p>
+  <p class="sub">Everything you'd run on a Trello board, in a Google Sheet that's all yours: grab the ready-made copy, or add it straight into your current KPI sheet. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. You make a copy &amp; follow up.</p>
 </header>
 
 <nav class="toc">
   <a href="#what">What You Get</a>
   <a href="#need">Before You Start</a>
+  <a href="#copy">Get Your Copy</a>
   <a href="#customize">Customize</a>
-  <a href="#install">Install</a>
+  <a href="#install">Existing Sheet</a>
   <a href="#daily">Daily Rhythm</a>
   <a href="#script">The Script</a>
   <a href="#fixes">Fixes &amp; Changes</a>
@@ -373,22 +374,37 @@
   <div class="kicker">02 / BEFORE YOU START</div>
   <h2>What you need</h2>
   <ul class="clean">
-    <li><strong>Your current KPI sheet</strong>, the Google Sheet where your leads already land. The board gets added to it as two new tabs, so nothing about your tracker changes. (A fresh sheet works too if you're starting clean.)</li>
-    <li><strong>Claude</strong> at <a href="https://claude.ai">claude.ai</a>. The free plan works, &amp; everything happens in the regular Claude chat, in your browser or the Claude app. You do not need Claude Code or Cowork for any of this.</li>
-    <li><strong>Claude connected to your Google Drive.</strong> Claude needs to be able to access your KPI sheet through your Drive so it can read your lead tab's layout during the customize step. In claude.ai it's Settings → Connectors → Google Drive.</li>
-    <li><strong>The script.</strong> It's further down this page, in <a href="#script">The Script</a>. One copy button grabs the whole thing.</li>
-    <li><strong>About 15 minutes.</strong> Honestly.</li>
+    <li><strong>A Google account.</strong> For the main copy-and-go path, that's honestly the whole list.</li>
+    <li><strong>Two minutes.</strong> The template install below is one click plus a rename.</li>
+    <li><strong>Only if you customize</strong> (your own stages, wiring your instant-form tab, importing old leads): <strong>Claude</strong> at <a href="https://claude.ai">claude.ai</a>. The free plan works, &amp; everything happens in the regular Claude chat, in your browser or the Claude app. You do not need Claude Code or Cowork for any of this. Connect Claude to your Google Drive first (Settings → Connectors → Google Drive) so it can access your KPI sheet &amp; read your lead tab's layout.</li>
+    <li><strong>Advanced lane only:</strong> the script itself, further down this page in <a href="#script">The Script</a>, for adding the kit to an existing KPI sheet.</li>
   </ul>
   <p>You do not need to know how to code. Claude does the technical part &amp; you follow the steps.</p>
 </section>
 
 <hr class="divider">
 
+<section id="copy">
+  <div class="kicker">03 / GET YOUR COPY</div>
+  <h2>Make your copy &amp; go</h2>
+  <p class="lead">The whole board, engine included, lives in a ready-made template. You don't install anything.</p>
+  <ol class="clean">
+    <li>Open the <a href="https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy"><strong>Pipeline Board Kit template</strong></a>. Google shows a <strong>Make a copy</strong> button. Click it.</li>
+    <li>That's the install. The sheet that opens is yours: the board is already built, the engine is already inside, &amp; nothing in it reports back to anyone. Rename it whatever you like.</li>
+    <li>Add your people on the <strong>Pipeline</strong> tab &amp; start moving them with the Stage dropdown. The <strong>Form Q1 to Q4</strong> columns hold instant-form answers; every form asks different questions, so type your own questions right over those four headers.</li>
+    <li>Want the daily "who's due" email? <strong>Pipeline board menu → 3. Turn ON automation</strong>, then approve Google's permission popup. It may say "Google hasn't verified this app"; that's your own copy's script asking. Click Advanced → Go to → Allow. (Full explanation in <a href="#install">the advanced section</a>.)</li>
+  </ol>
+  <div class="note"><p>Auto-importing leads from an instant-form tab &amp; bringing in your old Trello list live in <a href="#customize">Customize</a>. The board itself works fully by hand from minute one.</p></div>
+</section>
+
+<hr class="divider">
+
 <section id="customize">
-  <div class="kicker">03 / STEP ONE</div>
+  <div class="kicker">04 / CUSTOMIZE (OPTIONAL)</div>
   <h2>Have Claude customize it for you</h2>
-  <p>The script comes preloaded with the exact stages &amp; colors from Ashley's board. If you want it exactly like that, skip straight to <a href="#install">Install</a>.</p>
-  <p>Want your own stages, or want it wired to the tab where your leads arrive? Open a normal Claude chat (the same place you'd ask Claude anything), copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
+  <p>Your copy arrives with Ashley's stages &amp; colors. Happy with those? Skip this whole section. &amp; renaming the four answer-column headers needs no Claude either; just type over them on the sheet.</p>
+  <p>For deeper changes (your own stages, wiring the tab where your instant-form leads land, importing your old Trello list): open a normal Claude chat (the same place you'd ask Claude anything), copy the prompt below, &amp; paste the script from <a href="#script">The Script</a> where the prompt says so. Claude interviews you one question at a time, then hands back your customized copy.</p>
+  <p>To install the customized version into your copied sheet: <strong>Extensions → Apps Script</strong>, select everything in the editor, paste Claude's version over it, save (Ctrl+S, Cmd+S on a Mac), then <strong>Pipeline board menu → 1. Build the board</strong> &amp; answer yes to the rebuild. Do this before loading real people on, since rebuilding clears the board.</p>
   <div class="promptbox">
     <div class="phead"><span>Prompt 1 · Customize my script</span><button class="copybtn" data-target="prompt1" onclick="copyBlock(this)">Copy</button></div>
     <pre class="prompttext" id="prompt1">I have a Google Apps Script that builds a Trello-style lead pipeline board inside my KPI sheet in Google Sheets. I'm pasting it below. Customize ONLY the CONFIG section at the top. Don't change anything below the line that says "no edits needed below this line".
@@ -413,8 +429,9 @@ Here's the script:
 <hr class="divider">
 
 <section id="install">
-  <div class="kicker">04 / STEP TWO</div>
-  <h2>Install it in your sheet</h2>
+  <div class="kicker">05 / ADVANCED</div>
+  <h2>Add it to your existing KPI sheet</h2>
+  <p>Already have a KPI sheet your leads flow into, &amp; want the board living right beside them instead of in a fresh copy? Install the engine directly. This is the one lane with a paste in it.</p>
   <ol class="clean">
     <li>Open your KPI sheet, then <strong>Extensions → Apps Script</strong>.</li>
     <li>Click into the code area &amp; delete whatever is there, including the little "function myFunction" placeholder. Then paste your script <strong>with the keyboard</strong>: Ctrl+V on Windows, Cmd+V on a Mac. Heads up: the right-click Paste menu often does nothing inside the script editor, so if a paste "isn't working", switch to the keyboard &amp; it will. If even the keyboard does nothing, check two things: you clicked in the big code area itself, so there's a blinking cursor there (clicking Code.gs in the left sidebar isn't enough), &amp; the clipboard actually has the script (paste into the address bar of a new tab to test; if nothing appears, go back to the guide &amp; hit Copy again, watching for the "Copied!" flash). On a Mac the browser's menu bar <strong>Edit → Paste</strong> always works, even when Cmd+V is ignored. Press <strong>Ctrl+S</strong> (Cmd+S) to save.</li>
@@ -441,7 +458,7 @@ Here's the script:
 <hr class="divider">
 
 <section id="daily">
-  <div class="kicker">05 / STEP THREE</div>
+  <div class="kicker">06 / EVERY DAY</div>
   <h2>The daily rhythm</h2>
   <ul class="clean">
     <li><strong>Moving a card is one dropdown.</strong> On the Pipeline tab, change the person's Stage. The board redraws instantly. Never edit the board tab itself; it politely warns you if you try.</li>
@@ -455,8 +472,9 @@ Here's the script:
 <hr class="divider">
 
 <section id="script">
-  <div class="kicker">06 / THE SCRIPT</div>
+  <div class="kicker">07 / THE SCRIPT</div>
   <h2>The script itself</h2>
+  <p>Template users: this exact engine is already inside your copy, so you only need this section for the customize prompt or the advanced lane.</p>
   <p>This is the whole engine: the board builder, the auto-import, the date stamping, &amp; the reminder email. Copy it with the button, then head back to <a href="#customize">Step One</a> to customize it, or straight to <a href="#install">Install</a> to use it as-is. You can also <a href="pipeline-board-kit.gs" download>download it as a file</a>.</p>
   <p>Two rescue moves if copying gives you grief: if the button doesn't flip to "Copied!", download the file, open it in Notepad (TextEdit on a Mac), select all &amp; copy from there. &amp; when you paste into the script editor, use the keyboard (Ctrl+V, or Cmd+V on a Mac); the right-click Paste menu often does nothing in there.</p>
   <div class="promptbox codewrap">
@@ -525,8 +543,10 @@ var STAGES = [
 // Stages where nobody owes a follow-up (Due? shows "—" unless you set a Next FU date)
 var NO_DUE_STAGES = ['My Team', 'Leads Archive', 'Post-Call No-Go', 'Call Scheduled'];
 
-// Headers for the four form-answer columns on the Pipeline tab
-var ANSWER_HEADERS = ['Called to Build?', 'Motivation', 'Watch By', 'What Spoke to Them'];
+// Headers for the four form-answer columns on the Pipeline tab. Generic on
+// purpose, since everyone's instant form asks different questions. You can just
+// type your real questions over these four header cells on the sheet later.
+var ANSWER_HEADERS = ['Form Q1', 'Form Q2', 'Form Q3', 'Form Q4'];
 
 // Days after a touch before the next follow-up is due
 var FU_GAP_DAYS = 2;
@@ -615,6 +635,7 @@ function buildPipelineBoard() {
   pipe.getRange(1, STAGE_COL).setNote('Move someone through the pipeline by changing this dropdown — the board redraws itself. Everyone starts at "' + LANDING_STAGE + '".');
   pipe.getRange(1, NEXTFU_COL).setNote('Optional due date — set it and Due? flips to DUE that day (always wins). Blank = due ' + FU_GAP_DAYS + ' days after last touch. With automation on, changing a Stage fills these dates for you.');
   pipe.getRange(1, DUE_COL).setNote('Auto: DUE = follow-up owed. "—" = ' + NO_DUE_STAGES.join(', ') + '.');
+  pipe.getRange(1, 3).setNote('Answer columns from your instant form. The headers are generic because every form asks different questions. Type your own questions right over these four header cells, no code changes needed.');
 
   // --- Board tab ---
   var n = STAGES.length;
@@ -865,7 +886,7 @@ function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;'); }
 <hr class="divider">
 
 <section id="fixes">
-  <div class="kicker">07 / WHEN LIFE HAPPENS</div>
+  <div class="kicker">08 / WHEN LIFE HAPPENS</div>
   <h2>Fixes &amp; changes</h2>
   <h3>Something's not working</h3>
   <p>Don't troubleshoot alone. Paste this to Claude along with your installed script &amp; what you're seeing:</p>
