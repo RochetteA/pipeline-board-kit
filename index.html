@@ -399,6 +399,7 @@ Interview me first, one question at a time:
 3. Whether my leads arrive on a tab in my KPI sheet automatically (from a Meta instant form, a form tool, etc.). If yes: you have access to my Google Drive, so open my KPI sheet, find that tab, & read its header row to work out the column numbers for name, email, & up to four form answers, plus pick an empty column for the checkboxes. If you can't open my sheet, ask me to paste the tab's first two rows instead.
 4. What I want the four answer-column headers to say.
 5. How many days after a touch before the next follow-up is due (the default is 2).
+6. Whether I already have leads somewhere else right now, like a Trello board, another spreadsheet, or my notes. If yes: once the script is done, ask me to paste that list in whatever format I have. Turn it into rows I can paste straight into the Pipeline tab, 8 columns in this order: Name, Email, the four answer columns (blank is fine), Stage (match each person to the closest stage in my new pipeline), Last Touch (leave blank so everyone flags as due for a check-in). Tell me to paste them starting in column A of the first empty row, & warn me never to type or paste anything into the Due? column.
 
 If I have no lead tab yet, set FORM_TABS to empty & tell me I can type people in by hand.
 If my stage list changes, adjust the colors so they still read as one progression.
@@ -419,7 +420,7 @@ Here's the script:
     <li>Delete whatever is in the editor. Paste your script. Press <strong>Ctrl+S</strong> (Cmd+S on a Mac).</li>
     <li>Go back to your spreadsheet &amp; <strong>reload the browser tab</strong>. Within a few seconds a new menu called <strong>Pipeline board</strong> appears next to Help.</li>
     <li>Click <strong>Pipeline board → 1. Build the board</strong>, &amp; approve the authorization (more on that below).</li>
-    <li>If you wired a lead tab in Step One: click <strong>2. Add checkbox columns</strong>, then <strong>3. Turn ON automation</strong>. That last click starts the auto-import &amp; the morning email.</li>
+    <li>If you wired a lead tab in Step One: click <strong>2. Add checkbox columns</strong>, then <strong>3. Turn ON automation</strong>. That last click starts the auto-import &amp; the morning email, &amp; it also imports every lead already sitting on your lead tab. The people you have now land on the board in that same click; nothing gets copied over by hand.</li>
   </ol>
   <div class="deep">
     <h3>About the authorization popup</h3>
