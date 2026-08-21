@@ -13,7 +13,8 @@
  *
  * INSTALL (10 minutes, one time):
  *   1. Open your Google Sheet → Extensions → Apps Script.
- *   2. Delete whatever is in the editor, paste this whole file, press Ctrl+S.
+ *   2. Delete whatever is in the editor, paste this whole file, press Ctrl+S
+ *      (Cmd+S on a Mac).
  *   3. Reload the spreadsheet tab in your browser.
  *   4. Use the new "Pipeline board" menu → "1. Build the board".
  *      Google will ask you to authorize — it's your own script, in your own
