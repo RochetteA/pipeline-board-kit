@@ -427,6 +427,14 @@ Here's the script:
     <p>The first time you run the menu, Google asks you to authorize the script. You may see a screen that says <strong>"Google hasn't verified this app."</strong> That warning shows up for every personal script anyone writes in their own sheet. It's yours, running in your account, touching only this spreadsheet &amp; the reminder email it sends you.</p>
     <p>Click <strong>Advanced</strong>, then <strong>Go to (your project name)</strong>, then <strong>Allow</strong>. That's it, &amp; you only do it once.</p>
   </div>
+  <h3>If Apps Script won't even open</h3>
+  <p>Clicked <strong>Extensions → Apps Script</strong> &amp; landed on a Google Drive page that says <strong>"Sorry, unable to open the file at this time"</strong>? You're signed into more than one Google account in that browser, &amp; Google opened the script editor under the wrong one. (The address bar gives it away with something like /u/2/ or /u/6/ in the middle.) The fix takes a minute:</p>
+  <ol class="clean">
+    <li>Open a fresh <strong>Incognito or Private window</strong>.</li>
+    <li>Sign in with <strong>only</strong> the Google account that owns your KPI sheet.</li>
+    <li>Open the sheet in that window, then <strong>Extensions → Apps Script</strong>. It opens normally &amp; you can carry on from step 2 above.</li>
+  </ol>
+  <p>Prefer to stay out of Incognito? Sign out of every Google account, then sign back in with the sheet's account first so it becomes the default. Or give that account its own browser profile &amp; run your whole KPI world from there.</p>
   <p>When the build finishes you'll have two new tabs: <strong>Pipeline</strong> (your working list) &amp; <strong>Pipeline Board</strong> (the board itself).</p>
 </section>
 
