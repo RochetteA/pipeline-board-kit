@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>The Pipeline Board Kit · Claude Code Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Pinyon+Script&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #800020;
+    --forest:   #366049;
+    --cream:    #f5e6d3;
+    --gold:     #d4af37;
+    --charcoal: #36454f;
+    --card:     #faf0df;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--forest); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+  a:hover { color: var(--burgundy); }
+
+  .hero { background: var(--forest); color: var(--cream); text-align: center; padding: 84px 24px 72px; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 26px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(40px, 7vw, 68px); line-height: 1.12; max-width: 760px; margin: 0 auto; }
+  .hero h1 .script { font-family: 'Pinyon Script', cursive; font-weight: 400; font-size: clamp(48px, 8.5vw, 84px); color: var(--gold); display: inline-block; padding: 0 6px; }
+  .gold-rule { width: 72px; height: 2px; background: var(--gold); margin: 30px auto; }
+  .hero .sub { max-width: 620px; margin: 0 auto; font-size: 17px; font-weight: 400; color: var(--cream); opacity: .94; }
+
+  nav.toc {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(245, 230, 211, .96);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--gold);
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 4px 26px; padding: 13px 18px;
+  }
+  nav.toc a { font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
+  nav.toc a:hover { color: var(--forest); }
+
+  main { max-width: 800px; margin: 0 auto; padding: 24px 22px 40px; }
+  section { padding: 58px 0 6px; }
+  .kicker { font-size: 14px; font-weight: 600; letter-spacing: .26em; color: var(--gold); margin-bottom: 8px; }
+  h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(30px, 5vw, 40px); color: var(--burgundy); line-height: 1.18; margin-bottom: 18px; }
+  h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 23px; color: var(--burgundy); margin: 40px 0 12px; }
+  p { margin-bottom: 16px; }
+  .lead { font-size: 18px; }
+  ul.clean, ol.clean { margin: 0 0 18px 22px; }
+  ul.clean li, ol.clean li { margin-bottom: 10px; }
+  strong { color: var(--burgundy); }
+
+  .note { border-left: 3px solid var(--gold); padding: 4px 0 4px 18px; margin: 20px 0 24px; font-size: 15.5px; }
+  .note p:last-child { margin-bottom: 0; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 22px 0; }
+  .card { background: var(--card); border-top: 2px solid var(--gold); border-radius: 0 0 12px 12px; padding: 18px 20px; font-size: 15px; }
+  .card b { display: block; color: var(--burgundy); font-size: 15.5px; margin-bottom: 6px; }
+
+  .promptbox { background: var(--card); border: 1.5px solid var(--forest); border-radius: 12px; margin: 20px 0 28px; overflow: hidden; }
+  .promptbox .phead {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    background: var(--forest); color: var(--cream);
+    padding: 10px 18px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  }
+  .copybtn {
+    font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--forest); background: var(--cream); border: none; border-radius: 100px; padding: 6px 16px; cursor: pointer;
+  }
+  .copybtn:hover { background: var(--gold); color: var(--charcoal); }
+  .prompttext { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.65; white-space: pre-wrap; padding: 18px 20px; margin: 0; color: var(--charcoal); }
+
+  .deep { background: var(--burgundy); color: var(--cream); border-radius: 16px; padding: 40px 34px; margin: 34px 0; }
+  .deep h3 { color: var(--gold); margin-top: 0; }
+  .deep strong { color: var(--gold); }
+  .deep p:last-child { margin-bottom: 0; }
+  .deep.forest { background: var(--forest); }
+  .deep.forest h3 { color: var(--cream); }
+  .deep.forest strong { color: var(--gold); }
+
+  .divider { width: 100%; max-width: 800px; margin: 30px auto 0; border: none; border-top: 1px solid var(--gold); opacity: .55; }
+
+  footer { background: var(--charcoal); color: var(--cream); text-align: center; padding: 54px 24px; margin-top: 70px; }
+  footer .fscript { font-family: 'Pinyon Script', cursive; font-size: 34px; color: var(--gold); display: block; margin-bottom: 10px; }
+  footer p { font-size: 14px; opacity: .92; max-width: 520px; margin: 0 auto 8px; }
+  footer .brand { letter-spacing: .28em; text-transform: uppercase; font-size: 12px; font-weight: 600; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
+  <h1>The Claude Code <span class="script">edition</span></h1>
+  <div class="gold-rule"></div>
+  <p class="sub">Same board, same pipeline, but your own Claude does the setup with you: it customizes the engine, reads your lead sheet's layout, preps your clipboard, &amp; talks you through every click. You answer questions &amp; follow along.</p>
+</header>
+
+<nav class="toc">
+  <a href="index.html">All Paths</a>
+  <a href="#what">What This Is</a>
+  <a href="#need">Before You Start</a>
+  <a href="#build">Build It</a>
+  <a href="#leads">Your Leads</a>
+  <a href="#questions">Form Questions</a>
+  <a href="#fixes">Fixes</a>
+</nav>
+
+<main>
+
+<section id="what">
+  <div class="kicker">01 / THIS MANUAL</div>
+  <h2>Who this is for</h2>
+  <p class="lead">This edition is for team members who run <strong>Claude Code</strong> (Claude in a terminal or in VS Code). If that's not you, you don't need it: the <a href="no-code.html">main guide</a> sets you up with zero code &amp; zero terminal.</p>
+  <p>Here, instead of following written steps, you hand your Claude a prompt &amp; it works with you like an assistant: it interviews you, fetches the team's kit itself, reads your lead sheet's layout from a CSV you drop in a folder, customizes everything to your stages &amp; your form, loads the result onto your clipboard, &amp; walks you through the few clicks that Google insists a human makes (pasting into the script editor &amp; approving the permission popup are owner-only actions; no tool can do those for you).</p>
+  <div class="cards">
+    <div class="card"><b>Your Claude does</b>The thinking: reading your lead tab's columns, customizing the engine, formatting your old leads, fixing errors, telling you exactly what to click next.</div>
+    <div class="card"><b>You do</b>The clicks: one paste into the script editor, one permission popup, a few menu clicks. Your Claude narrates every single one.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="need">
+  <div class="kicker">02 / BEFORE YOU START</div>
+  <h2>What you need</h2>
+  <ul class="clean">
+    <li><strong>Claude Code</strong>, installed &amp; signed in, opened in a fresh empty folder (the prompts assume it can save files there &amp; use your clipboard).</li>
+    <li><strong>Your Google Sheet</strong>: either the KPI tracker your leads land in, or nothing at all (your Claude can start you from the team template).</li>
+    <li><strong>15 to 20 minutes</strong>, ideally in a browser window where only one Google account is signed in: the one that owns your sheet.</li>
+  </ul>
+  <p>Not sure what Claude Code is? Then this page isn't your path, &amp; that's fine: the <a href="no-code.html">main guide</a> gets you the identical board with no terminal in sight.</p>
+</section>
+
+<hr class="divider">
+
+<section id="build">
+  <div class="kicker">03 / BUILD IT</div>
+  <h2>The build prompt</h2>
+  <p>Copy this whole thing &amp; paste it into Claude Code. It kicks off an interview, one question at a time, then a guided install. Nothing happens without you seeing it first.</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt · Build my pipeline board</span><button class="copybtn" data-target="prompt-build" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-build">You are setting up my "Pipeline Board": a Trello-style lead pipeline inside Google Sheets, from my team's shared kit. I may not be technical. Work with me one step at a time and wait for my answer before moving on. You cannot edit my Google Sheet directly, so your job is to prepare everything, put things on my clipboard, and walk me through every click.
+
+First, download the kit's script yourself from:
+https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs
+Save it in this folder as pipeline-board-kit.gs and read it. You will customize ONLY the CONFIG section at the top; never change anything below the "no edits needed below this line" marker.
+
+Then interview me, one question at a time:
+1. Where should the board live? Either inside my existing KPI/leads spreadsheet (added as two new tabs), or as its own fresh sheet made by copying the team template at https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy
+2. Keep the default pipeline stages, or use my own list? The first stage is where every new lead lands. If I give custom stages, also ask which ones mean "no follow-up owed", and adjust the colors so they still read as one progression.
+3. How many questions does my instant form have (3, 4, 5, or none), and what are they? Set ANSWER_HEADERS to one short header per question; the whole sheet layout adapts to the count automatically.
+4. Do leads land automatically on a tab in my spreadsheet (from a Meta instant form or a form tool)? If yes, have me download that tab as a CSV (File > Download > Comma Separated Values) and drop the file in this folder. Read its headers yourself and work out the 1-indexed column numbers for name, email, and each answer, pick an empty column for the checkboxes, and fill in FORM_TABS using the tab's EXACT name in Google Sheets (confirm the tab name with me; the CSV filename is not always the same). If there is no lead tab, set FORM_TABS = {}.
+
+Then build my version: apply my answers to the CONFIG, save the customized script in this folder, and put its full contents on my clipboard (detect my operating system and use the right clipboard command).
+
+Then walk me through installing it, one step at a time, checking in after each:
+- Open my sheet (or make my template copy first, if that is the route we chose)
+- Extensions > Apps Script, click into the code area, select all, paste with the keyboard (Ctrl+V, or Cmd+V on a Mac; the right-click paste menu often does nothing in there), then save
+- Back to the sheet, reload the page, wait for the "Pipeline board" menu to appear
+- Menu > 1. Build the board, and talk me through Google's permission popup, including the "Google hasn't verified this app" screen (Advanced > Go to > Allow). It is my own script, running as me, in my own sheet.
+- If I have a lead tab: menu > 2. Add checkbox columns, then 3. Turn ON automation. Tell me beforehand that this also imports every lead already sitting on that tab.
+
+Finally, verify with me: the menu exists, both tabs look right, and if I have a lead tab, ask me what count the sync reported. If anything shows an error, ask me for the exact red text and fix it.
+
+Two rules to remind me about along the way: never type in the Due? column (it is one formula), and if I am signed into several Google accounts, do everything in a window where only the sheet's account is signed in.</pre>
+  </div>
+  <div class="note"><p>Already made a template copy from the main guide? Say so when Claude asks question 1: it will skip straight to customizing what you have.</p></div>
+</section>
+
+<hr class="divider">
+
+<section id="leads">
+  <div class="kicker">04 / YOUR LEADS · OPTIONAL</div>
+  <h2>Move your existing leads over</h2>
+  <p>Totally optional, &amp; separate on purpose: the board works from minute one without it. When you're ready to bring in the people you already have (from your leads sheet, an old Trello board, notes, anywhere), give your Claude this:</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt · Move my existing leads</span><button class="copybtn" data-target="prompt-leads" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-leads">My Pipeline Board (my team's Google Sheets kit) is already set up. Help me bring my existing leads onto it. Ask me first: where do my leads live today?
+
+Case 1: on a tab inside the SAME spreadsheet as the board. Check that my installed script's FORM_TABS covers that tab: have me paste the CONFIG section of my script, or download the lead tab as a CSV into this folder so you can work out the columns yourself. If FORM_TABS needs changing, put the corrected full script on my clipboard and walk me through re-pasting it (Extensions > Apps Script, select all, paste with the keyboard, save). Then have me run: Pipeline board menu > Sync lead tabs now, and ask me what count it reports.
+
+Case 2: anywhere else (a Trello board, another spreadsheet, a CSV export, my notes, my phone). I will paste the list or drop files in this folder, in whatever messy format I have. Turn it into clean rows matching my Pipeline tab's exact column order: Name, Email, my answer columns (blank is fine), Stage, Last Touch. Map each person to the closest stage in my pipeline (default: the first stage). Leave Last Touch blank so everyone flags as due for a check-in, unless my data includes a real last-contact date. Put the finished rows on my clipboard as tab-separated values, then tell me exactly where to paste them: the Pipeline tab, column A, first empty row, and warn me never to paste into or past the Due? column.
+
+Afterward, verify with me: the counts in row 2 of the Pipeline Board tab, and spot-check a few names together.</pre>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="questions">
+  <div class="kicker">05 / FORM QUESTIONS</div>
+  <h2>Three, four, or five questions</h2>
+  <p>Instant forms differ across the team: some ask three questions, some four, some five. The kit handles all of them: the <strong>ANSWER_HEADERS</strong> list in the script's CONFIG has one entry per question, &amp; every column in the sheet repositions itself automatically around however many you have.</p>
+  <p>If you covered this during the build prompt's interview, you're already done. Use this one when your form changes later, or you skipped it the first time:</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt · Match my form questions</span><button class="copybtn" data-target="prompt-questions" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-questions">My team's Pipeline Board kit needs to match my instant form, which has [3 / 4 / 5] questions. Here they are: [paste your questions].
+
+The kit's layout is driven by ANSWER_HEADERS in the CONFIG: one entry per question, and every column position adapts automatically. Update my script: set ANSWER_HEADERS to short versions of my questions, and fix the FORM_TABS answerCols to match if my lead tab is wired. I will paste my currently installed script so you keep my other customizations; if I have nothing installed yet, fetch the kit from https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs instead.
+
+Put the full updated script on my clipboard and walk me through installing it (Extensions > Apps Script, select all, paste with the keyboard, save), then Pipeline board menu > 1. Build the board.
+
+IMPORTANT: rebuilding erases everyone on the board. If my board already has people on it, first walk me through copying my Pipeline rows somewhere safe, then rebuild, then help me paste my people back into the right columns.</pre>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="fixes">
+  <div class="kicker">06 / WHEN LIFE HAPPENS</div>
+  <h2>Fixes</h2>
+  <p>The nice thing about this edition: your troubleshooter lives on your computer. Hand it the problem:</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt · Fix my board</span><button class="copybtn" data-target="prompt-fix" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-fix">My Pipeline Board (my team's Google Sheets kit) is misbehaving. Here is what I see: [describe it, and include any red error text from Extensions > Apps Script > Executions, plus what you clicked]. Here is my installed script: [paste it]. The original kit lives at https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs if you need to compare against a known-good version. Diagnose it with me step by step. If the fix is a corrected script, put the complete version on my clipboard and walk me through re-pasting it.</pre>
+  </div>
+  <div class="deep forest">
+    <h3>Still stuck?</h3>
+    <p>Message Ashley with a screenshot &amp; what your Claude said. Every snag that reaches her makes both manuals better for the next person.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="fscript">you've got this</span>
+  <p>Set it up once, then let the board &amp; your Claude do the remembering. Your only job is the follow-up itself: show up, be human, &amp; keep going.</p>
+  <div class="brand">Ashley Marie Innovation</div>
+</footer>
+
+<script>
+function copyBlock(btn) {
+  var el = document.getElementById(btn.dataset.target);
+  var text = el.innerText;
+  var flash = function (label) {
+    var old = btn.textContent;
+    btn.textContent = label;
+    setTimeout(function () { btn.textContent = old; }, 2000);
+  };
+  var fallback = function () {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    flash(ok ? 'Copied!' : 'Copy failed');
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { flash('Copied!'); }, fallback);
+  } else {
+    fallback();
+  }
+}
+</script>
+
+</body>
+</html>

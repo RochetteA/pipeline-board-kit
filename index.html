@@ -18,7 +18,6 @@
     --card:     #faf0df;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
     background: var(--cream);
     color: var(--charcoal);
@@ -26,290 +25,69 @@
     font-size: 17px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   a { color: var(--forest); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
   a:hover { color: var(--burgundy); }
 
-  /* ---------- Hero ---------- */
-  .hero {
-    background: var(--burgundy);
-    color: var(--cream);
+  .hero { background: var(--burgundy); color: var(--cream); text-align: center; padding: 84px 24px 64px; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 26px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(40px, 7vw, 68px); line-height: 1.12; max-width: 760px; margin: 0 auto; }
+  .hero h1 .script { font-family: 'Pinyon Script', cursive; font-weight: 400; font-size: clamp(48px, 8.5vw, 84px); color: var(--gold); display: inline-block; padding: 0 6px; }
+  .gold-rule { width: 72px; height: 2px; background: var(--gold); margin: 30px auto; }
+  .hero .sub { max-width: 620px; margin: 0 auto; font-size: 17px; color: var(--cream); opacity: .94; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 54px 22px 30px; flex: 1; width: 100%; }
+  .pick {
     text-align: center;
-    padding: 84px 24px 72px;
-  }
-  .eyebrow {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .32em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 26px;
-  }
-  .hero h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: clamp(40px, 7vw, 68px);
-    line-height: 1.12;
-    max-width: 760px;
-    margin: 0 auto;
+    font-size: clamp(28px, 5vw, 36px);
+    color: var(--burgundy);
+    margin-bottom: 30px;
   }
-  .hero h1 .script {
-    font-family: 'Pinyon Script', cursive;
-    font-weight: 400;
-    font-size: clamp(48px, 8.5vw, 84px);
-    color: var(--gold);
-    display: inline-block;
-    padding: 0 6px;
-  }
-  .gold-rule {
-    width: 72px; height: 2px;
-    background: var(--gold);
-    margin: 30px auto;
-  }
-  .hero .sub {
-    max-width: 620px;
-    margin: 0 auto;
-    font-size: 17px;
-    font-weight: 400;
-    color: var(--cream);
-    opacity: .94;
-  }
-
-  /* ---------- Nav ---------- */
-  nav.toc {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(245, 230, 211, .96);
-    backdrop-filter: blur(4px);
-    border-bottom: 1px solid var(--gold);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px 26px;
-    padding: 13px 18px;
-  }
-  nav.toc a {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--charcoal);
+  .doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  a.door {
+    display: block;
+    background: var(--card);
+    border: 1.5px solid rgba(128, 0, 32, .25);
+    border-top: 4px solid var(--gold);
+    border-radius: 0 0 16px 16px;
+    padding: 34px 30px 30px;
     text-decoration: none;
-  }
-  nav.toc a:hover { color: var(--forest); }
-
-  /* ---------- Layout ---------- */
-  main { max-width: 800px; margin: 0 auto; padding: 24px 22px 40px; }
-  section { padding: 58px 0 6px; }
-  .kicker {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .26em;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: clamp(30px, 5vw, 40px);
-    color: var(--burgundy);
-    line-height: 1.18;
-    margin-bottom: 18px;
-  }
-  h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 23px;
-    color: var(--burgundy);
-    margin: 40px 0 12px;
-  }
-  h4 {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--forest);
-    margin: 28px 0 10px;
-  }
-  p { margin-bottom: 16px; }
-  .lead { font-size: 18px; }
-  ul.clean, ol.clean { margin: 0 0 18px 22px; }
-  ul.clean li, ol.clean li { margin-bottom: 10px; }
-  strong { color: var(--burgundy); }
-
-  /* ---------- Components ---------- */
-  .note {
-    border-left: 3px solid var(--gold);
-    padding: 4px 0 4px 18px;
-    margin: 20px 0 24px;
-    font-size: 15.5px;
-  }
-  .note p:last-child { margin-bottom: 0; }
-
-  .flow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    margin: 26px 0 10px;
-  }
-  .flow .step {
-    background: var(--card);
-    border: 1px solid rgba(128, 0, 32, .22);
-    border-radius: 100px;
-    padding: 7px 16px;
-    font-size: 13.5px;
-    font-weight: 600;
     color: var(--charcoal);
-    white-space: nowrap;
+    font-weight: 400;
+    transition: transform .12s ease, box-shadow .12s ease;
   }
-  .flow .arrow { color: var(--gold); font-weight: 700; }
-
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 22px 0; }
-  .card {
-    background: var(--card);
-    border-top: 2px solid var(--gold);
-    border-radius: 0 0 12px 12px;
-    padding: 18px 20px;
-    font-size: 15px;
-  }
-  .card b { display: block; color: var(--burgundy); font-size: 15.5px; margin-bottom: 6px; }
-
-  /* board mock */
-  .boardmock {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 18px;
-    background: var(--card);
-    border: 1px solid rgba(128, 0, 32, .18);
-    border-radius: 12px;
-    margin: 22px 0 8px;
-  }
-  .bm-col { min-width: 132px; flex: 0 0 auto; }
-  .bm-head {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    color: #fff8ef;
-    border-radius: 6px;
-    padding: 6px 8px;
-    text-align: center;
-    line-height: 1.3;
-  }
-  .bm-card {
-    background: #fff;
-    border-radius: 6px;
-    font-size: 12.5px;
-    padding: 5px 9px;
-    margin-top: 6px;
-    color: var(--charcoal);
-    box-shadow: 0 1px 2px rgba(43, 26, 30, .14);
-  }
-  .mockcaption { font-size: 13.5px; opacity: .8; margin-bottom: 18px; }
-
-  /* prompt + code blocks */
-  .promptbox {
-    background: var(--card);
-    border: 1.5px solid var(--forest);
-    border-radius: 12px;
-    margin: 20px 0 28px;
-    overflow: hidden;
-  }
-  .promptbox .phead {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+  a.door:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(43, 26, 30, .14); color: var(--charcoal); }
+  .door .dk { font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--forest); margin-bottom: 10px; }
+  .door h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 27px; color: var(--burgundy); line-height: 1.2; margin-bottom: 12px; }
+  .door p { font-size: 15.5px; margin-bottom: 20px; }
+  .door .go {
+    display: inline-block;
     background: var(--forest);
     color: var(--cream);
-    padding: 10px 18px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: .14em;
+    letter-spacing: .12em;
     text-transform: uppercase;
-  }
-  .copybtn {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--forest);
-    background: var(--cream);
-    border: none;
     border-radius: 100px;
-    padding: 6px 16px;
-    cursor: pointer;
+    padding: 10px 24px;
   }
-  .copybtn:hover { background: var(--gold); color: var(--charcoal); }
-  .prompttext {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14.5px;
-    line-height: 1.65;
-    white-space: pre-wrap;
-    padding: 18px 20px;
-    margin: 0;
-    color: var(--charcoal);
-  }
-  .codewrap details { border: none; background: transparent; margin: 0; }
-  .codewrap summary {
-    cursor: pointer;
-    list-style: none;
-    padding: 14px 20px;
-    font-weight: 600;
-    color: var(--forest);
-    font-size: 15px;
-  }
-  .codewrap summary::-webkit-details-marker { display: none; }
-  .codewrap summary::before { content: "+"; color: var(--gold); font-weight: 700; margin-right: 12px; }
-  .codewrap details[open] summary::before { content: "–"; }
-  .codewrap pre {
-    margin: 0;
-    padding: 4px 20px 20px;
-    overflow-x: auto;
-    max-height: 480px;
-    overflow-y: auto;
-    font-family: Consolas, Menlo, monospace;
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: var(--charcoal);
+  .door:hover .go { background: var(--burgundy); }
+
+  .unsure {
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 18px;
+    margin: 36px auto 0;
+    font-size: 15.5px;
+    max-width: 680px;
   }
 
-  .deep {
-    background: var(--burgundy);
-    color: var(--cream);
-    border-radius: 16px;
-    padding: 40px 34px;
-    margin: 34px 0;
-  }
-  .deep h3 { color: var(--gold); margin-top: 0; }
-  .deep strong { color: var(--gold); }
-  .deep ul { margin: 0 0 0 20px; }
-  .deep li { margin-bottom: 12px; }
-  .deep p:last-child { margin-bottom: 0; }
-  .deep.forest { background: var(--forest); }
-  .deep.forest h3 { color: var(--cream); }
-  .deep.forest strong { color: var(--gold); }
-
-  .divider { width: 100%; max-width: 800px; margin: 30px auto 0; border: none; border-top: 1px solid var(--gold); opacity: .55; }
-
-  footer {
-    background: var(--charcoal);
-    color: var(--cream);
-    text-align: center;
-    padding: 54px 24px;
-    margin-top: 70px;
-  }
-  footer .fscript {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 34px;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 10px;
-  }
+  footer { background: var(--charcoal); color: var(--cream); text-align: center; padding: 44px 24px; margin-top: 60px; }
+  footer .fscript { font-family: 'Pinyon Script', cursive; font-size: 34px; color: var(--gold); display: block; margin-bottom: 10px; }
   footer p { font-size: 14px; opacity: .92; max-width: 520px; margin: 0 auto 8px; }
   footer .brand { letter-spacing: .28em; text-transform: uppercase; font-size: 12px; font-weight: 600; margin-top: 18px; }
 </style>
@@ -320,136 +98,28 @@
   <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
   <h1>Every lead, on <span class="script">one board</span></h1>
   <div class="gold-rule"></div>
-  <p class="sub">Everything you'd run on a Trello board, in a Google Sheet that's all yours: grab the ready-made copy, or add it straight into your current KPI sheet. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today. You make a copy &amp; follow up.</p>
+  <p class="sub">A Trello-style pipeline that lives in your own Google Sheet. Cards move with one click, new leads add themselves, &amp; a little ⚠ tells you exactly who to follow up with today.</p>
 </header>
 
-<nav class="toc">
-  <a href="#what">What You Get</a>
-  <a href="#need">Before You Start</a>
-  <a href="#copy">Get Your Copy</a>
-  <a href="#install">Existing Sheet</a>
-  <a href="#daily">Daily Rhythm</a>
-  <a href="#fixes">Fixes &amp; Changes</a>
-</nav>
-
 <main>
-
-<section id="what">
-  <div class="kicker">01 / THE SYSTEM</div>
-  <h2>What this builds for you</h2>
-  <p class="lead">Two new tabs added to your current KPI sheet. One is your working list of people. The other is a color-coded board where every person is a card sitting in a pipeline stage.</p>
-  <p>It can fully replace a Trello board. Same columns-and-cards feel, no separate app to log into, &amp; your pipeline lives right beside your numbers &amp; your leads.</p>
-  <div class="boardmock">
-    <div class="bm-col"><div class="bm-head" style="background:#7E9C85">Lead Form Fill Out</div><div class="bm-card">Sarah M. ⚠</div><div class="bm-card">Vickie A. ⚠</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#729377">Follow-Up #1</div><div class="bm-card">Em W.</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#5F836B">Follow-Up #2</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#3E6850">Sent MC FU #1</div><div class="bm-card">Phyllis R. ⚠</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#C6A664;color:#2b1a1e">Watched MC FU</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#9C3B52">Sent DP Link</div><div class="bm-card">Dana K.</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#800020">DP Sign-Up</div></div>
-    <div class="bm-col"><div class="bm-head" style="background:#8A6D2F">My Team</div><div class="bm-card">Jess T.</div></div>
+  <div class="pick">Pick your path</div>
+  <div class="doors">
+    <a class="door" href="no-code.html">
+      <div class="dk">For everyone · No tools needed</div>
+      <h2>Without Claude Code</h2>
+      <p>Make a copy of the ready-made sheet &amp; go. No code, no downloads, nothing to install. If you can copy a Google Sheet, you're set. Two minutes, honestly.</p>
+      <span class="go">Take this path</span>
+    </a>
+    <a class="door" href="claude-code.html">
+      <div class="dk">Have Claude Code?</div>
+      <h2>With Claude Code</h2>
+      <p>Your own Claude sets it up with you: your stages, your instant form's questions (3, 4, or 5), &amp; your existing leads brought in. You answer questions &amp; click where it points.</p>
+      <span class="go">Take this path</span>
+    </a>
   </div>
-  <p class="mockcaption">A peek at the board. Yours shows your own stages &amp; your own people, with a live count at the top of every column.</p>
-  <div class="flow">
-    <span class="step">Lead comes in</span><span class="arrow">→</span>
-    <span class="step">Lands on the board automatically</span><span class="arrow">→</span>
-    <span class="step">You follow up</span><span class="arrow">→</span>
-    <span class="step">One dropdown moves their card</span><span class="arrow">→</span>
-    <span class="step">⚠ appears when they're due again</span>
+  <div class="unsure">
+    <p>Not sure which? If "Claude Code" doesn't ring a bell, the first path is yours &amp; it gets you the identical board. &amp; the doors stay open: plenty of people start without it, set up Claude Code later, &amp; come back through the second door for the custom stuff.</p>
   </div>
-  <div class="cards">
-    <div class="card"><b>The board &amp; the cards</b>Every stage is a column. Every person is a card. Moving someone is one dropdown click, no dragging, no copy-paste, no retyping names.</div>
-    <div class="card"><b>Leads add themselves</b>New people from your lead form land at the first stage on their own, with their name, email, &amp; form answers already filled in. Duplicates get skipped.</div>
-    <div class="card"><b>Dates that stamp themselves</b>Change someone's stage &amp; the sheet records today as your last touch, then sets the next follow-up for 2 days out. You never track dates by hand.</div>
-    <div class="card"><b>A morning nudge</b>Any day someone is due, you get an email around 8 AM listing who, their stage, &amp; your notes. Nobody due, no email.</div>
-  </div>
-  <div class="note"><p>Everything runs inside your own Google account. No subscriptions, no third-party tools, nothing to pay for. Your leads never leave your sheet.</p></div>
-</section>
-
-<hr class="divider">
-
-<section id="need">
-  <div class="kicker">02 / BEFORE YOU START</div>
-  <h2>What you need</h2>
-  <ul class="clean">
-    <li><strong>A Google account.</strong> For the main copy-and-go path, that's honestly the whole list.</li>
-    <li><strong>Two minutes.</strong> The template install below is one click plus a rename.</li>
-  </ul>
-  <p>No code, no downloads, no new apps. If you can make a copy of a Google Sheet, you're qualified.</p>
-</section>
-
-<hr class="divider">
-
-<section id="copy">
-  <div class="kicker">03 / GET YOUR COPY</div>
-  <h2>Make your copy &amp; go</h2>
-  <p class="lead">The whole board, engine included, lives in a ready-made template. You don't install anything &amp; you never touch code.</p>
-  <div class="note">
-    <p><strong>Bringing your leads with you?</strong> A walkthrough for auto-importing from an instant-form tab &amp; carrying in your old Trello list is on its way as its own guide. The board works fully by hand from minute one either way.</p>
-    <p><strong>Rather have the board inside the KPI tracker sheet you already use</strong> instead of a fresh copy? Skip this section &amp; follow <a href="#install">Add it to your existing KPI sheet</a>.</p>
-  </div>
-  <ol class="clean">
-    <li>Open the <a href="https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy" target="_blank" rel="noopener"><strong>Pipeline Board Kit template</strong></a>. Google shows a <strong>Make a copy</strong> button. Click it.</li>
-    <li>That's the install. The sheet that opens is yours: the board is already built, the engine is already inside, &amp; nothing in it reports back to anyone. Rename it whatever you like.</li>
-    <li>Add your people on the <strong>Pipeline</strong> tab &amp; start moving them with the Stage dropdown. The <strong>Form Q1 to Q4</strong> columns hold instant-form answers; every form asks different questions, so type your own questions right over those four headers.</li>
-    <li>Want the daily "who's due" email? <strong>Pipeline board menu → 3. Turn ON automation</strong>, then approve Google's permission popup. It may say "Google hasn't verified this app"; that's your own copy's script asking. Click Advanced → Go to → Allow. (More on that popup just below.)</li>
-  </ol>
-  <div class="deep">
-    <h3>About the authorization popup</h3>
-    <p>The first time you run the menu, Google asks you to authorize the script. You may see a screen that says <strong>"Google hasn't verified this app."</strong> That warning shows up for every personal script anyone writes in their own sheet. It's yours, running in your account, touching only this spreadsheet &amp; the reminder email it sends you.</p>
-    <p>Click <strong>Advanced</strong>, then <strong>Go to (your project name)</strong>, then <strong>Allow</strong>. That's it, &amp; you only do it once.</p>
-  </div>
-</section>
-
-
-
-<hr class="divider">
-
-<section id="install">
-  <div class="kicker">04 / EXISTING SHEET</div>
-  <h2>Add it to your existing KPI sheet</h2>
-  <p>Already have a KPI sheet your leads flow into, &amp; want the board living right beside them instead of in a fresh copy? Copy the tabs over; there's no code in this either.</p>
-  <p>The board itself (columns, colors, the Stage dropdown, the DUE flags &amp; the ⚠) is all formulas &amp; formatting, so the two tabs can move into your tracker like any other sheets:</p>
-  <ol class="clean">
-    <li><a href="https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy" target="_blank" rel="noopener">Make your copy of the template</a> first, if you haven't already.</li>
-    <li>In your copy, right-click the <strong>Pipeline</strong> tab at the bottom → <strong>Copy to → Existing spreadsheet</strong> → pick your KPI tracker.</li>
-    <li>Do the same for the <strong>Pipeline Board</strong> tab.</li>
-    <li>Open your KPI tracker &amp; rename the two new tabs: "Copy of Pipeline" becomes <strong>Pipeline</strong>, "Copy of Pipeline Board" becomes <strong>Pipeline Board</strong>. The renames matter; they're how the board's formulas find each other, &amp; any #REF! errors vanish once both names are right.</li>
-  </ol>
-  <p>What the tab-copy doesn't bring: the engine. Google attaches scripts to a spreadsheet, not to its tabs, so the self-stamping dates, the checkbox sending, the instant-form auto-import &amp; the morning email stay behind. You'd move stages with the dropdown &amp; type Last Touch dates yourself; the DUE flags &amp; ⚠ still work off whatever dates you enter. Want the automation in your tracker too? That setup is coming as its own walkthrough.</p>
-  </section>
-
-<hr class="divider">
-
-<section id="daily">
-  <div class="kicker">05 / EVERY DAY</div>
-  <h2>The daily rhythm</h2>
-  <ul class="clean">
-    <li><strong>Moving a card is one dropdown.</strong> On the Pipeline tab, change the person's Stage. The board redraws instantly. Never edit the board tab itself; it politely warns you if you try.</li>
-    <li><strong>Dates handle themselves.</strong> Changing a stage stamps Last Touch to today &amp; Next FU to 2 days out. Booked a call for Thursday? Type Thursday's date into Next FU. A date you set always wins.</li>
-    <li><strong>DUE &amp; the ⚠.</strong> When someone's follow-up day arrives, or they've sat untouched 2+ days, their row flags DUE &amp; their card gets a ⚠. Resting stages like My Team &amp; Leads Archive show a dash instead, so finished people never nag you.</li>
-    <li><strong>New people arrive on their own.</strong> With automation on, form leads land at the first stage with their answers filled in. You can also tick the → Pipeline checkbox on a lead tab to send someone over yourself.</li>
-    <li><strong>The morning email.</strong> Around 8 AM, any day someone is due, you get the list: who, what stage, your notes. Open the sheet, work the list, close the app.</li>
-  </ul>
-</section>
-
-
-
-
-
-<hr class="divider">
-
-<section id="fixes">
-  <div class="kicker">06 / WHEN LIFE HAPPENS</div>
-  <h2>Fixes &amp; changes</h2>
-  <p>Something looks off? A popup you weren't expecting, a formula showing an error, a tab that seems stuck? Take a screenshot of what you see &amp; send it to Ashley. Nearly every snag so far has been a 30-second fix, &amp; every single one has made this guide better for the next person.</p>
-  <p><strong>Want more than the standard setup?</strong> Your own stage names, your instant-form leads importing themselves, your old Trello list carried in: that walkthrough is on its way. Tell Ashley you want it &amp; you'll get it first.</p>
-  <div class="deep forest">
-    <h3>Stuck anyway?</h3>
-    <p>Message Ashley. Seriously. Five minutes of asking beats an hour of fighting a spreadsheet, &amp; if something in this guide didn't make sense, she wants to know so it gets fixed for the next person.</p>
-  </div>
-</section>
-
 </main>
 
 <footer>
@@ -457,36 +127,6 @@
   <p>Set it up once, then let the board do the remembering. Your only job is the follow-up itself: show up, be human, &amp; keep going.</p>
   <div class="brand">Ashley Marie Innovation</div>
 </footer>
-
-<script>
-function copyBlock(btn) {
-  var el = document.getElementById(btn.dataset.target);
-  var text = el.innerText;
-  var flash = function (label) {
-    var old = btn.textContent;
-    btn.textContent = label;
-    setTimeout(function () { btn.textContent = old; }, 2000);
-  };
-  var fallback = function () {
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    var ok = false;
-    try { ok = document.execCommand('copy'); } catch (e) {}
-    document.body.removeChild(ta);
-    flash(ok ? 'Copied!' : 'Copy failed');
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function () { flash('Copied!'); }, fallback);
-  } else {
-    fallback();
-  }
-}
-</script>
 
 </body>
 </html>

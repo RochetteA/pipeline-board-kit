@@ -60,9 +60,11 @@ var STAGES = [
 // Stages where nobody owes a follow-up (Due? shows "—" unless you set a Next FU date)
 var NO_DUE_STAGES = ['My Team', 'Leads Archive', 'Post-Call No-Go', 'Call Scheduled'];
 
-// Headers for the four form-answer columns on the Pipeline tab. Generic on
-// purpose, since everyone's instant form asks different questions. You can just
-// type your real questions over these four header cells on the sheet later.
+// Headers for the form-answer columns on the Pipeline tab. ONE HEADER PER
+// QUESTION on your instant form: 3 questions = 3 entries, 5 questions = 5.
+// Every column position in the sheet adjusts automatically to this list.
+// Generic on purpose, since everyone's form asks different questions. You can
+// also just type your real questions over these header cells on the sheet later.
 var ANSWER_HEADERS = ['Form Q1', 'Form Q2', 'Form Q3', 'Form Q4'];
 
 // Days after a touch before the next follow-up is due
@@ -72,7 +74,8 @@ var FU_GAP_DAYS = 2;
 // from a Meta instant form). All column numbers are 1-indexed (A=1, B=2, ...).
 //   checkboxCol : empty column to hold the "→ Pipeline" checkboxes
 //   nameCol / emailCol : where the person's name and email live
-//   answerCols  : up to 4 columns of form answers (underscores become spaces)
+//   answerCols  : the form-answer columns, one per ANSWER_HEADERS entry
+//                 (fewer is fine; underscores in answers become spaces)
 //   firstDataRow: 2 if the tab has a header row, 1 if data starts at the top
 //   autoImport  : true = every new row is added to the Pipeline automatically
 //                 (when automation is ON); false = you tick the checkbox yourself
@@ -85,8 +88,11 @@ var FORM_TABS = {
 // ===================== no edits needed below this line ======================
 
 var LANDING_STAGE = STAGES[0].name;
+var NUM_Q = ANSWER_HEADERS.length;
 var HEADERS = ['Name', 'Email'].concat(ANSWER_HEADERS).concat(['Stage', 'Last Touch', 'Next FU', 'Due?', 'Notes']);
-var STAGE_COL = 7, TOUCH_COL = 8, NEXTFU_COL = 9, DUE_COL = 10, NOTES_COL = 11;
+// Column positions all derive from how many answer columns you have:
+// 1 Name | 2 Email | 3..(2+NUM_Q) answers | Stage | Last Touch | Next FU | Due? | Notes
+var STAGE_COL = 3 + NUM_Q, TOUCH_COL = 4 + NUM_Q, NEXTFU_COL = 5 + NUM_Q, DUE_COL = 6 + NUM_Q, NOTES_COL = 7 + NUM_Q;
 var DATA_ROWS = 1000, BOARD_ROWS = 400;
 var HEADER_BG = '#366049', HEADER_TEXT = '#FFF8EF', DUE_TEXT = '#800020', DUE_BG = '#F7F0DF', INK = '#2B1A1E';
 
@@ -110,6 +116,7 @@ function buildPipelineBoard() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi();
   if (STAGES.length > 26) { ui.alert('Max 26 stages — trim the STAGES list.'); return; }
+  if (NUM_Q < 1 || NUM_Q > 8) { ui.alert('ANSWER_HEADERS needs 1 to 8 entries.'); return; }
   var old = [ss.getSheetByName(PIPELINE_TAB), ss.getSheetByName(BOARD_TAB)].filter(Boolean);
   if (old.length) {
     var a = ui.alert('Rebuild?', 'Tabs "' + PIPELINE_TAB + '" / "' + BOARD_TAB + '" already exist. Delete and rebuild them? ANYONE ON THE BOARD WILL BE ERASED.', ui.ButtonSet.YES_NO);
@@ -125,17 +132,21 @@ function buildPipelineBoard() {
   pipe.setFrozenRows(1);
   pipe.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
     .setBackground(HEADER_BG).setFontColor(HEADER_TEXT).setFontWeight('bold').setFontFamily('Montserrat').setVerticalAlignment('middle');
-  [180, 200, 110, 140, 140, 260, 185, 105, 105, 70, 320].forEach(function (px, i) { pipe.setColumnWidth(i + 1, px); });
+  var widths = [180, 200];
+  for (var w = 0; w < NUM_Q; w++) widths.push(w === NUM_Q - 1 ? 240 : 140);
+  widths = widths.concat([185, 105, 105, 70, 320]);
+  widths.forEach(function (px, i) { pipe.setColumnWidth(i + 1, px); });
 
   var stageNames = STAGES.map(function (s) { return s.name; });
   pipe.getRange(2, STAGE_COL, DATA_ROWS - 1, 1).setDataValidation(
     SpreadsheetApp.newDataValidation().requireValueInList(stageNames, true).setAllowInvalid(false).build());
   pipe.getRange(2, TOUCH_COL, DATA_ROWS - 1, 2).setNumberFormat('yyyy-mm-dd');
 
+  var ST = colLetter(STAGE_COL - 1), TO = colLetter(TOUCH_COL - 1), NF = colLetter(NEXTFU_COL - 1);
   var pat = NO_DUE_STAGES.map(escRe).join('|');
   pipe.getRange(2, DUE_COL).setFormula(
-    '=ARRAYFORMULA(IF($A$2:$A="","",IF($I$2:$I<>"",IF(TODAY()>=N($I$2:$I),"DUE",""),' +
-    'IF(REGEXMATCH($G$2:$G&"","^(' + pat + ')$"),"—",IF(TODAY()-N($H$2:$H)>=2,"DUE","")))))');
+    '=ARRAYFORMULA(IF($A$2:$A="","",IF($' + NF + '$2:$' + NF + '<>"",IF(TODAY()>=N($' + NF + '$2:$' + NF + '),"DUE",""),' +
+    'IF(REGEXMATCH($' + ST + '$2:$' + ST + '&"","^(' + pat + ')$"),"—",IF(TODAY()-N($' + TO + '$2:$' + TO + ')>=' + FU_GAP_DAYS + ',"DUE","")))))');
 
   var rules = STAGES.map(function (s) {
     return SpreadsheetApp.newConditionalFormatRule().whenTextEqualTo(s.name)
@@ -152,7 +163,7 @@ function buildPipelineBoard() {
   pipe.getRange(1, STAGE_COL).setNote('Move someone through the pipeline by changing this dropdown — the board redraws itself. Everyone starts at "' + LANDING_STAGE + '".');
   pipe.getRange(1, NEXTFU_COL).setNote('Optional due date — set it and Due? flips to DUE that day (always wins). Blank = due ' + FU_GAP_DAYS + ' days after last touch. With automation on, changing a Stage fills these dates for you.');
   pipe.getRange(1, DUE_COL).setNote('Auto: DUE = follow-up owed. "—" = ' + NO_DUE_STAGES.join(', ') + '.');
-  pipe.getRange(1, 3).setNote('Answer columns from your instant form. The headers are generic because every form asks different questions. Type your own questions right over these four header cells, no code changes needed.');
+  pipe.getRange(1, 3).setNote('Answer columns from your instant form, one per question. The headers are generic because every form asks different questions. Type your own questions right over these header cells, no code changes needed.');
 
   // --- Board tab ---
   var n = STAGES.length;
@@ -161,13 +172,14 @@ function buildPipelineBoard() {
   if (board.getMaxColumns() > n) board.deleteColumns(n + 1, board.getMaxColumns() - n);
   if (board.getMaxRows() > BOARD_ROWS) board.deleteRows(BOARD_ROWS + 1, board.getMaxRows() - BOARD_ROWS);
   board.setFrozenRows(2);
+  var DL = colLetter(DUE_COL - 1);
   board.getRange(1, 1, 1, n).setValues([stageNames]);
   board.getRange(2, 1, 1, n).setFormulas([STAGES.map(function (_, i) {
-    return '=SUMPRODUCT(--(\'' + PIPELINE_TAB + '\'!$G$2:$G=' + colLetter(i) + '$1))';
+    return '=SUMPRODUCT(--(\'' + PIPELINE_TAB + '\'!$' + ST + '$2:$' + ST + '=' + colLetter(i) + '$1))';
   })]);
   board.getRange(3, 1, 1, n).setFormulas([STAGES.map(function (_, i) {
-    return '=IFERROR(FILTER(\'' + PIPELINE_TAB + '\'!$A$2:$A&IF(\'' + PIPELINE_TAB + '\'!$J$2:$J="DUE"," ⚠",""),' +
-      '\'' + PIPELINE_TAB + '\'!$G$2:$G=' + colLetter(i) + '$1,\'' + PIPELINE_TAB + '\'!$A$2:$A<>""))';
+    return '=IFERROR(FILTER(\'' + PIPELINE_TAB + '\'!$A$2:$A&IF(\'' + PIPELINE_TAB + '\'!$' + DL + '$2:$' + DL + '="DUE"," ⚠",""),' +
+      '\'' + PIPELINE_TAB + '\'!$' + ST + '$2:$' + ST + '=' + colLetter(i) + '$1,\'' + PIPELINE_TAB + '\'!$A$2:$A<>""))';
   })]);
   STAGES.forEach(function (s, i) {
     board.getRange(1, i + 1).setBackground(s.solid).setFontColor(s.text).setFontWeight('bold')
@@ -250,8 +262,16 @@ function extractLead(vals, cfg) {
   var email = pick(cfg.emailCol);
   var name = cfg.nameCol ? pick(cfg.nameCol) : (pick(cfg.firstNameCol) + ' ' + pick(cfg.lastNameCol)).trim();
   if (!name || name.toLowerCase() === 'x x' || name.toLowerCase() === 'x' || name === 'full_name') name = email;
-  var answers = (cfg.answerCols || []).map(function (c) { return pick(c).replace(/_/g, ' '); });
+  var answers = [];
+  for (var i = 0; i < NUM_Q; i++) {
+    var c = (cfg.answerCols || [])[i];
+    answers.push(c ? pick(c).replace(/_/g, ' ') : '');
+  }
   return { name: name, email: email, answers: answers };
+}
+
+function leadRow(lead) {
+  return [lead.name, lead.email].concat(lead.answers).concat([LANDING_STAGE]);
 }
 
 function existingKeys(pipe) {
@@ -287,8 +307,7 @@ function sendRow(sheet, row, cfg) {
     return;
   }
   var target = nextFreeRow(pipe);
-  pipe.getRange(target, 1, 1, 7).setValues([[lead.name, lead.email,
-    lead.answers[0] || '', lead.answers[1] || '', lead.answers[2] || '', lead.answers[3] || '', LANDING_STAGE]]);
+  pipe.getRange(target, 1, 1, 3 + NUM_Q).setValues([leadRow(lead)]);
   pipe.getRange(target, NOTES_COL).setValue('Added from "' + sheet.getName() + '" ' + fmt(new Date()));
   sheet.getRange(row, cfg.checkboxCol).setValue(true);
   toast(lead.name + ' → Pipeline (' + LANDING_STAGE + ')');
@@ -318,13 +337,12 @@ function autoSync() {
         if (keys[lead.email.toLowerCase()] || keys[lead.name.toLowerCase()]) return;
         keys[lead.email.toLowerCase()] = 1;
         keys[lead.name.toLowerCase()] = 1;
-        newRows.push([lead.name, lead.email,
-          lead.answers[0] || '', lead.answers[1] || '', lead.answers[2] || '', lead.answers[3] || '', LANDING_STAGE]);
+        newRows.push(leadRow(lead));
         notes.push(['Auto-added from "' + title + '" ' + fmt(new Date())]);
       });
       if (newRows.length) {
         var start = nextFreeRow(pipe);
-        pipe.getRange(start, 1, newRows.length, 7).setValues(newRows);
+        pipe.getRange(start, 1, newRows.length, 3 + NUM_Q).setValues(newRows);
         pipe.getRange(start, NOTES_COL, newRows.length, 1).setValues(notes);
         added += newRows.length;
       }
