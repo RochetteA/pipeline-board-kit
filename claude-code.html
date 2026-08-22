@@ -19,14 +19,7 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--charcoal);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
+  body { background: var(--cream); color: var(--charcoal); font-family: 'Montserrat', sans-serif; font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
   a { color: var(--forest); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
   a:hover { color: var(--burgundy); }
 
@@ -35,16 +28,9 @@
   .hero h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(40px, 7vw, 68px); line-height: 1.12; max-width: 760px; margin: 0 auto; }
   .hero h1 .script { font-family: 'Pinyon Script', cursive; font-weight: 400; font-size: clamp(48px, 8.5vw, 84px); color: var(--gold); display: inline-block; padding: 0 6px; }
   .gold-rule { width: 72px; height: 2px; background: var(--gold); margin: 30px auto; }
-  .hero .sub { max-width: 620px; margin: 0 auto; font-size: 17px; font-weight: 400; color: var(--cream); opacity: .94; }
+  .hero .sub { max-width: 620px; margin: 0 auto; font-size: 17px; color: var(--cream); opacity: .94; }
 
-  nav.toc {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(245, 230, 211, .96);
-    backdrop-filter: blur(4px);
-    border-bottom: 1px solid var(--gold);
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 4px 26px; padding: 13px 18px;
-  }
+  nav.toc { position: sticky; top: 0; z-index: 10; background: rgba(245, 230, 211, .96); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); border-bottom: 1px solid var(--gold); display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 26px; padding: 13px 18px; }
   nav.toc a { font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
   nav.toc a:hover { color: var(--forest); }
 
@@ -66,16 +52,13 @@
   .card { background: var(--card); border-top: 2px solid var(--gold); border-radius: 0 0 12px 12px; padding: 18px 20px; font-size: 15px; }
   .card b { display: block; color: var(--burgundy); font-size: 15.5px; margin-bottom: 6px; }
 
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 26px 0 10px; }
+  .flow .step { background: var(--card); border: 1px solid rgba(128, 0, 32, .22); border-radius: 100px; padding: 7px 16px; font-size: 13.5px; font-weight: 600; color: var(--charcoal); white-space: nowrap; }
+  .flow .arrow { color: var(--gold); font-weight: 700; }
+
   .promptbox { background: var(--card); border: 1.5px solid var(--forest); border-radius: 12px; margin: 20px 0 28px; overflow: hidden; }
-  .promptbox .phead {
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    background: var(--forest); color: var(--cream);
-    padding: 10px 18px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-  }
-  .copybtn {
-    font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--forest); background: var(--cream); border: none; border-radius: 100px; padding: 6px 16px; cursor: pointer;
-  }
+  .promptbox .phead { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--forest); color: var(--cream); padding: 10px 18px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .copybtn { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--forest); background: var(--cream); border: none; border-radius: 100px; padding: 6px 16px; cursor: pointer; }
   .copybtn:hover { background: var(--gold); color: var(--charcoal); }
   .prompttext { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.65; white-space: pre-wrap; padding: 18px 20px; margin: 0; color: var(--charcoal); }
 
@@ -101,29 +84,40 @@
   <div class="eyebrow">Team Resource · Pipeline Board Kit</div>
   <h1>The Claude Code <span class="script">edition</span></h1>
   <div class="gold-rule"></div>
-  <p class="sub">Same board, same pipeline, but your own Claude does the setup with you: it customizes the engine, reads your lead sheet's layout, preps your clipboard, &amp; talks you through every click. You answer questions &amp; follow along.</p>
+  <p class="sub">Your own Claude builds the board straight into your Google Sheet, imports your leads, &amp; keeps it current. No code pasted anywhere, no Apps Script, nothing to touch inside the spreadsheet. You answer questions &amp; click where it points.</p>
 </header>
 
 <nav class="toc">
   <a href="index.html">All Paths</a>
-  <a href="#what">What This Is</a>
+  <a href="#how">How It Works</a>
   <a href="#need">Before You Start</a>
   <a href="#build">Build It</a>
   <a href="#leads">Your Leads</a>
   <a href="#questions">Form Questions</a>
+  <a href="#current">Keeping It Current</a>
   <a href="#fixes">Fixes</a>
 </nav>
 
 <main>
 
-<section id="what">
-  <div class="kicker">01 / THIS MANUAL</div>
-  <h2>Who this is for</h2>
-  <p class="lead">This edition is for team members who run <strong>Claude Code</strong> (Claude in a terminal or in VS Code). If that's not you, you don't need it: the <a href="no-code.html">main guide</a> sets you up with zero code &amp; zero terminal.</p>
-  <p>Here, instead of following written steps, you hand your Claude a prompt &amp; it works with you like an assistant: it interviews you, fetches the team's kit itself, reads your lead sheet's layout from a CSV you drop in a folder, customizes everything to your stages &amp; your form, loads the result onto your clipboard, &amp; walks you through the few clicks that Google insists a human makes (pasting into the script editor &amp; approving the permission popup are owner-only actions; no tool can do those for you).</p>
+<section id="how">
+  <div class="kicker">01 / HOW IT WORKS</div>
+  <h2>A robot that works in your sheet</h2>
+  <p class="lead">This edition is for team members running <strong>Claude Code</strong>. If that's not you, the <a href="no-code.html">no-code path</a> gets you the identical board in two minutes.</p>
+  <p>Here's the trick that lets Claude do the work instead of handing you code: Google lets you create a <strong>robot account</strong> (Google calls it a "service account") that can edit a spreadsheet you share with it, exactly like a teammate. Your Claude walks you through creating one (about 5 minutes of clicking in the Google Cloud console, once), you share your sheet with the robot's email address, &amp; from then on your Claude builds tabs, writes formulas, sets colors &amp; dropdowns, &amp; imports leads directly. Nothing is ever pasted into the spreadsheet.</p>
+  <div class="flow">
+    <span class="step">Create the robot (once)</span><span class="arrow">→</span>
+    <span class="step">Share your sheet with it</span><span class="arrow">→</span>
+    <span class="step">Claude builds the board</span><span class="arrow">→</span>
+    <span class="step">Claude imports your leads</span>
+  </div>
   <div class="cards">
-    <div class="card"><b>Your Claude does</b>The thinking: reading your lead tab's columns, customizing the engine, formatting your old leads, fixing errors, telling you exactly what to click next.</div>
-    <div class="card"><b>You do</b>The clicks: one paste into the script editor, one permission popup, a few menu clicks. Your Claude narrates every single one.</div>
+    <div class="card"><b>Your Claude does</b>Guides the robot setup, reads your lead tab's columns itself (no downloads, no Drive connection), builds the board to your stages &amp; your form, imports your leads, tidies old lists, re-syncs, fixes problems.</div>
+    <div class="card"><b>You do</b>About ten clicks in the Google Cloud console, one Share, &amp; answering questions. Claude narrates every step &amp; waits for you.</div>
+  </div>
+  <div class="note">
+    <p><strong>Sheet owned by someone else?</strong> That's fine. You only need to share it with the robot's email as an Editor. If you can't share it yourself, the owner adds that one address &amp; you're off; it takes them ten seconds.</p>
+    <p><strong>About the robot's key file.</strong> Creating the robot gives you a small .json file: think of it as that robot's password. Keep it in your project folder, never post or send it, &amp; you can delete the robot in Google Cloud any time. It can only touch sheets you've shared with it.</p>
   </div>
 </section>
 
@@ -133,11 +127,12 @@
   <div class="kicker">02 / BEFORE YOU START</div>
   <h2>What you need</h2>
   <ul class="clean">
-    <li><strong>Claude Code</strong>, installed &amp; signed in, opened in a fresh empty folder (the prompts assume it can save files there &amp; use your clipboard).</li>
-    <li><strong>Your Google Sheet</strong>: either the KPI tracker your leads land in, or nothing at all (your Claude can start you from the team template).</li>
-    <li><strong>15 to 20 minutes</strong>, ideally in a browser window where only one Google account is signed in: the one that owns your sheet.</li>
+    <li><strong>Claude Code</strong>, installed &amp; signed in, opened in a fresh empty folder (it will save a couple of files there).</li>
+    <li><strong>A Google account</strong> to create the robot with. Any Google account works; the one that uses the sheet is simplest.</li>
+    <li><strong>Your spreadsheet</strong>: the KPI tracker your leads land in, or a blank new sheet. You need to be able to share it (or know who can).</li>
+    <li><strong>20 to 30 minutes</strong> the first time. Most of it is answering questions.</li>
   </ul>
-  <p>Not sure what Claude Code is? Then this page isn't your path, &amp; that's fine: the <a href="no-code.html">main guide</a> gets you the identical board with no terminal in sight.</p>
+  <p>No Meta connection, no Google Drive connection, no downloads: the robot reads your lead tab directly. &amp; if "Claude Code" doesn't ring a bell, take the <a href="no-code.html">no-code path</a> instead.</p>
 </section>
 
 <hr class="divider">
@@ -145,35 +140,27 @@
 <section id="build">
   <div class="kicker">03 / BUILD IT</div>
   <h2>The build prompt</h2>
-  <p>Copy this whole thing &amp; paste it into Claude Code. It kicks off an interview, one question at a time, then a guided install. Nothing happens without you seeing it first.</p>
+  <p>Copy this &amp; paste it into Claude Code. It creates the robot with you, then interviews you, then builds. Nothing happens without you seeing it first.</p>
   <div class="promptbox">
-    <div class="phead"><span>Prompt · Build my pipeline board</span><button class="copybtn" data-target="prompt-build" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt-build">You are setting up my "Pipeline Board": a Trello-style lead pipeline inside Google Sheets, from my team's shared kit. I may not be technical. Work with me one step at a time and wait for my answer before moving on. You cannot edit my Google Sheet directly, so your job is to prepare everything, put things on my clipboard, and walk me through every click.
+    <div class="phead"><span>Prompt · Build my pipeline board</span><button type="button" class="copybtn" data-target="prompt-build" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-build">You are setting up my "Pipeline Board": a Trello-style lead pipeline built directly inside my Google Sheet, using my team's kit. I may not be technical. Work with me one step at a time and wait for my answer before moving on. Never ask me to paste code anywhere, and never touch Apps Script; everything goes into the sheet through the kit's builder tool and a Google robot account.
 
-First, download the kit's script yourself from:
-https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs
-Save it in this folder as pipeline-board-kit.gs and read it. You will customize ONLY the CONFIG section at the top; never change anything below the "no edits needed below this line" marker.
+STEP A: the tool. Download my team's builder from https://rochettea.github.io/pipeline-board-kit/pipeline-board-builder.js into this folder and read its header comment; it explains every command and the config file. Check that Node is installed (node -v, version 18 or newer). If it is missing, walk me through installing it from nodejs.org (LTS), then continue.
 
-Then interview me, one question at a time:
-1. Where should the board live? Either inside my existing KPI/leads spreadsheet (added as two new tabs), or as its own fresh sheet made by copying the team template at https://docs.google.com/spreadsheets/d/1F-Opl3XD9zjBU79z2y-3FqzNm9mnxMypQzbYGk_e7Lc/copy
-2. Keep the default pipeline stages, or use my own list? The first stage is where every new lead lands. If I give custom stages, also ask which ones mean "no follow-up owed", and adjust the colors so they still read as one progression.
-3. How many questions does my instant form have (3, 4, 5, or none), and what are they? Set ANSWER_HEADERS to one short header per question; the whole sheet layout adapts to the count automatically.
-4. Do leads land automatically on a tab in my spreadsheet (from a Meta instant form or a form tool)? If yes, have me download that tab as a CSV (File > Download > Comma Separated Values) and drop the file in this folder. Read its headers yourself and work out the 1-indexed column numbers for name, email, and each answer, pick an empty column for the checkboxes, and fill in FORM_TABS using the tab's EXACT name in Google Sheets (confirm the tab name with me; the CSV filename is not always the same). If there is no lead tab, set FORM_TABS = {}.
+STEP B: the robot account, one click at a time, confirming after each step. Explain in one sentence what a service account is (a robot that can edit sheets I share with it; it can only touch what I share). Then guide me: 1) open console.cloud.google.com and sign in (accept the terms if it is my first visit); 2) the project picker at the top, "New project", name it Pipeline Board, Create, then select it; 3) menu, APIs and Services, Library, search "Google Sheets API", open it, Enable; 4) menu, IAM and Admin, Service Accounts, Create service account, name it pipeline-board-robot, Create and continue, Continue (no roles needed), Done; 5) click the robot in the list, Keys tab, Add key, Create new key, JSON, Create, which downloads a .json file; 6) have me move that file into this folder and rename it service-account.json. Read the file yourself, tell me the robot's email address (client_email), and remind me the file is like a password: keep it here, never share it. Add it to a .gitignore file in this folder.
 
-Then build my version: apply my answers to the CONFIG, save the customized script in this folder, and put its full contents on my clipboard (detect my operating system and use the right clipboard command).
+STEP C: my sheet. Ask me for the link to the spreadsheet I want the board in, or tell me I can start a blank Google Sheet at sheets.new if I prefer a fresh one. Then have me share that sheet with the robot's email as an Editor (Share button, paste the address, untick Notify). If the sheet belongs to someone else and I cannot share it, tell me to ask the owner to add that address. Write pipeline-config.json with the sheet link, then run: node pipeline-board-builder.js check. Keep helping me until check passes.
 
-Then walk me through installing it, one step at a time, checking in after each:
-- Open my sheet (or make my template copy first, if that is the route we chose)
-- Extensions > Apps Script, click into the code area, select all, paste with the keyboard (Ctrl+V, or Cmd+V on a Mac; the right-click paste menu often does nothing in there), then save
-- Back to the sheet, reload the page, wait for the "Pipeline board" menu to appear
-- Menu > 1. Build the board, and talk me through Google's permission popup, including the "Google hasn't verified this app" screen (Advanced > Go to > Allow). It is my own script, running as me, in my own sheet.
-- If I have a lead tab: menu > 2. Add checkbox columns, then 3. Turn ON automation. Tell me beforehand that this also imports every lead already sitting on that tab.
+STEP D: interview me, one question at a time. 1) Keep the default pipeline stages, or use my own list? The first stage is where every new lead lands. If I give custom stages, ask which ones mean "no follow-up owed" and choose colors so they still read as one progression. 2) How many questions does my instant form have (3, 4, 5, or none), and what are they? Set answerHeaders to one short header per question; if I say "generic" or have no form, use Form Q1, Q2, Q3 and I can rename them on the sheet later. 3) Do leads land automatically on a tab in that spreadsheet (from a Meta instant form or a form tool)? If yes, ask for the tab name exactly as written at the bottom of the sheet, run: node pipeline-board-builder.js inspect "That Tab Name", read the output yourself, work out the column numbers for name, email, and each answer, and whether the data starts on row 1 or 2. Put that in leadTabs in the config. If no lead tab, leave leadTabs empty.
 
-Finally, verify with me: the menu exists, both tabs look right, and if I have a lead tab, ask me what count the sync reported. If anything shows an error, ask me for the exact red text and fix it.
+STEP E: build. Save the config, then run: node pipeline-board-builder.js build. If I have a lead tab, then run: node pipeline-board-builder.js import, and tell me how many people came over (they all show as DUE on purpose, until I touch their card). Then run: node pipeline-board-builder.js due. Give me the board link the build printed and ask me to open it and tell you what I see: the colored stage columns, the count row, and my people as cards. If anything looks wrong, fix it with me.
 
-Two rules to remind me about along the way: never type in the Due? column (it is one formula), and if I am signed into several Google accounts, do everything in a window where only the sheet's account is signed in.</pre>
+STEP F: how to use it, briefly. Moving someone is the Stage dropdown on the Pipeline tab; the board redraws itself. When I follow up with someone, I type today's date in Last Touch (or a specific date in Next FU) and the DUE flag and the warning mark on their card clear until the follow-up is due again. Never type in the Due? column. Remind me that "node pipeline-board-builder.js import" pulls new leads over any time, and that this manual has a prompt to automate that.</pre>
   </div>
-  <div class="note"><p>Already made a template copy from the main guide? Say so when Claude asks question 1: it will skip straight to customizing what you have.</p></div>
+  <div class="deep">
+    <h3>What to expect</h3>
+    <p>Claude will stop after every step &amp; wait for you: "tell me when you've clicked Enable", "paste me the link to your sheet", "what do you see on the board?". The Google Cloud part looks more intimidating than it is; it's a handful of menu clicks &amp; one download, &amp; Claude knows exactly where each button lives. <strong>The moment "check" passes, you're past the only fiddly part.</strong> Everything after that is Claude doing the work.</p>
+  </div>
 </section>
 
 <hr class="divider">
@@ -181,16 +168,16 @@ Two rules to remind me about along the way: never type in the Due? column (it is
 <section id="leads">
   <div class="kicker">04 / YOUR LEADS · OPTIONAL</div>
   <h2>Move your existing leads over</h2>
-  <p>Totally optional, &amp; separate on purpose: the board works from minute one without it. When you're ready to bring in the people you already have (from your leads sheet, an old Trello board, notes, anywhere), give your Claude this:</p>
+  <p>Separate on purpose: the board works from minute one without it. If your leads land on a tab in the same spreadsheet, the build prompt already offered to import them. Use this one for everything else, or to do it later:</p>
   <div class="promptbox">
-    <div class="phead"><span>Prompt · Move my existing leads</span><button class="copybtn" data-target="prompt-leads" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt-leads">My Pipeline Board (my team's Google Sheets kit) is already set up. Help me bring my existing leads onto it. Ask me first: where do my leads live today?
+    <div class="phead"><span>Prompt · Move my existing leads</span><button type="button" class="copybtn" data-target="prompt-leads" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-leads">My Pipeline Board is already built in my Google Sheet with my team's builder tool (pipeline-board-builder.js and pipeline-config.json are in this folder, and the robot account works). Help me bring my existing leads onto the board. Ask me first: where do my leads live today?
 
-Case 1: on a tab inside the SAME spreadsheet as the board. Check that my installed script's FORM_TABS covers that tab: have me paste the CONFIG section of my script, or download the lead tab as a CSV into this folder so you can work out the columns yourself. If FORM_TABS needs changing, put the corrected full script on my clipboard and walk me through re-pasting it (Extensions > Apps Script, select all, paste with the keyboard, save). Then have me run: Pipeline board menu > Sync lead tabs now, and ask me what count it reports.
+Case 1: on a tab inside the SAME spreadsheet as the board. Ask for the exact tab name, run: node pipeline-board-builder.js inspect "That Tab Name", work out the column numbers for name, email, and each answer, add it to leadTabs in pipeline-config.json, then run: node pipeline-board-builder.js import. Tell me how many people came over. Remind me this command is safe to run again any time: it only adds people who are not on the board yet.
 
-Case 2: anywhere else (a Trello board, another spreadsheet, a CSV export, my notes, my phone). I will paste the list or drop files in this folder, in whatever messy format I have. Turn it into clean rows matching my Pipeline tab's exact column order: Name, Email, my answer columns (blank is fine), Stage, Last Touch. Map each person to the closest stage in my pipeline (default: the first stage). Leave Last Touch blank so everyone flags as due for a check-in, unless my data includes a real last-contact date. Put the finished rows on my clipboard as tab-separated values, then tell me exactly where to paste them: the Pipeline tab, column A, first empty row, and warn me never to paste into or past the Due? column.
+Case 2: anywhere else (a Trello board, another spreadsheet, a CSV export, my notes, my phone). I will paste the list or drop files in this folder, in whatever messy format I have. Turn it into a clean CSV in this folder with this header row: name,email, then one column per answer header in my config (blank is fine), then stage,last_touch. Map each person to the closest stage in my pipeline (default: the first stage). Leave last_touch blank so everyone flags as due for a check-in, unless my data includes a real last-contact date (use yyyy-mm-dd). Show me the first few rows so I can sanity-check the names, then run: node pipeline-board-builder.js import-csv thatfile.csv. People already on the board are skipped automatically.
 
-Afterward, verify with me: the counts in row 2 of the Pipeline Board tab, and spot-check a few names together.</pre>
+Afterward, run: node pipeline-board-builder.js due, and ask me to glance at the count row on the Pipeline Board tab.</pre>
   </div>
 </section>
 
@@ -199,29 +186,44 @@ Afterward, verify with me: the counts in row 2 of the Pipeline Board tab, and sp
 <section id="questions">
   <div class="kicker">05 / FORM QUESTIONS</div>
   <h2>Three, four, or five questions</h2>
-  <p>Instant forms differ across the team: some ask three questions, some four, some five. The kit handles all of them: the <strong>ANSWER_HEADERS</strong> list in the script's CONFIG has one entry per question, &amp; every column in the sheet repositions itself automatically around however many you have.</p>
-  <p>If you covered this during the build prompt's interview, you're already done. Use this one when your form changes later, or you skipped it the first time:</p>
+  <p>Instant forms differ across the team. The builder's config has <strong>answerHeaders</strong>, one entry per question, &amp; every column in the sheet repositions itself around however many you have. If you covered this in the build interview, you're done. Use this when your form changes, or you skipped it the first time:</p>
   <div class="promptbox">
-    <div class="phead"><span>Prompt · Match my form questions</span><button class="copybtn" data-target="prompt-questions" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt-questions">My team's Pipeline Board kit needs to match my instant form, which has [3 / 4 / 5] questions. Here they are: [paste your questions].
+    <div class="phead"><span>Prompt · Match my form questions</span><button type="button" class="copybtn" data-target="prompt-questions" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-questions">My Pipeline Board is built with my team's builder tool (pipeline-board-builder.js and pipeline-config.json are in this folder). My instant form has [3 / 4 / 5] questions. Here they are: [paste your questions].
 
-The kit's layout is driven by ANSWER_HEADERS in the CONFIG: one entry per question, and every column position adapts automatically. Update my script: set ANSWER_HEADERS to short versions of my questions, and fix the FORM_TABS answerCols to match if my lead tab is wired. I will paste my currently installed script so you keep my other customizations; if I have nothing installed yet, fetch the kit from https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs instead.
+Update answerHeaders in pipeline-config.json to one short header per question, and if leadTabs is set, update its answerCols to match (run inspect on the lead tab if you need to see the columns). The sheet layout adapts to the count automatically.
 
-Put the full updated script on my clipboard and walk me through installing it (Extensions > Apps Script, select all, paste with the keyboard, save), then Pipeline board menu > 1. Build the board.
-
-IMPORTANT: rebuilding erases everyone on the board. If my board already has people on it, first walk me through copying my Pipeline rows somewhere safe, then rebuild, then help me paste my people back into the right columns.</pre>
+Then rebuild without losing anyone: first run: node pipeline-board-builder.js export backup.csv, and tell me how many people it saved. Then run: node pipeline-board-builder.js build --rebuild. Then run: node pipeline-board-builder.js import-csv backup.csv, and confirm the same number of people came back, with their stages and dates intact. Finish with: node pipeline-board-builder.js due.</pre>
   </div>
 </section>
 
 <hr class="divider">
 
-<section id="fixes">
-  <div class="kicker">06 / WHEN LIFE HAPPENS</div>
-  <h2>Fixes</h2>
-  <p>The nice thing about this edition: your troubleshooter lives on your computer. Hand it the problem:</p>
+<section id="current">
+  <div class="kicker">06 / KEEPING IT CURRENT</div>
+  <h2>New leads &amp; the daily list</h2>
+  <p>Because the robot works from your computer rather than living inside the sheet, two small things are yours to run, &amp; your Claude can put both on a schedule:</p>
+  <ul class="clean">
+    <li><strong>New leads</strong> come over whenever <em>import</em> runs. Run it yourself, or have Claude schedule it (every hour, every morning, whatever you like).</li>
+    <li><strong>Who's due today</strong> comes from <em>due</em>. Same deal: run it, or let Claude schedule it &amp; show you the list each morning.</li>
+    <li><strong>Follow-up dates</strong>: when you touch someone, type today's date in Last Touch (or the real date in Next FU). The DUE flags &amp; ⚠ marks update on their own.</li>
+  </ul>
   <div class="promptbox">
-    <div class="phead"><span>Prompt · Fix my board</span><button class="copybtn" data-target="prompt-fix" onclick="copyBlock(this)">Copy</button></div>
-    <pre class="prompttext" id="prompt-fix">My Pipeline Board (my team's Google Sheets kit) is misbehaving. Here is what I see: [describe it, and include any red error text from Extensions > Apps Script > Executions, plus what you clicked]. Here is my installed script: [paste it]. The original kit lives at https://rochettea.github.io/pipeline-board-kit/pipeline-board-kit.gs if you need to compare against a known-good version. Diagnose it with me step by step. If the fix is a corrected script, put the complete version on my clipboard and walk me through re-pasting it.</pre>
+    <div class="phead"><span>Prompt · Keep my board current automatically</span><button type="button" class="copybtn" data-target="prompt-current" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-current">My Pipeline Board is built with my team's builder tool (pipeline-board-builder.js and pipeline-config.json in this folder). Set it up so my computer keeps the board current on its own: run "node pipeline-board-builder.js import" every hour, and run "node pipeline-board-builder.js due" every morning at 8 with the result saved to a file called due-today.txt in this folder that I can open. Use the right scheduler for my operating system (Task Scheduler on Windows, launchd on a Mac), make it survive restarts, and use full file paths so it works when I am not in this folder. Then show me how to check that it ran, how to read the morning list, and how to turn it off. Note that it only runs while my computer is awake, and tell me how to run either command by hand any time.</pre>
+  </div>
+  <div class="note"><p>Want the board to do even more from inside the sheet (dates that stamp themselves when you change a stage, an email instead of a file)? The no-code template's built-in engine does that, &amp; the two can coexist. Ask Ashley if you want it; it's a separate walkthrough.</p></div>
+</section>
+
+<hr class="divider">
+
+<section id="fixes">
+  <div class="kicker">07 / WHEN LIFE HAPPENS</div>
+  <h2>Fixes</h2>
+  <p>Your troubleshooter lives on your computer &amp; can see everything. Hand it the problem:</p>
+  <div class="promptbox">
+    <div class="phead"><span>Prompt · Fix my board</span><button type="button" class="copybtn" data-target="prompt-fix" onclick="copyBlock(this)">Copy</button></div>
+    <pre class="prompttext" id="prompt-fix">My Pipeline Board (built with my team's builder tool, pipeline-board-builder.js and pipeline-config.json in this folder) is misbehaving. Here is what I see: [describe it, paste any error text, or describe the screenshot]. Start by running: node pipeline-board-builder.js check, and read pipeline-config.json. Common causes to rule out in order: the robot is not shared on the sheet as an Editor (check prints the exact address to share with); the sheet link in the config changed; a tab was renamed; the answer count in the config does not match the board. A fresh copy of the builder is always at https://rochettea.github.io/pipeline-board-kit/pipeline-board-builder.js if mine got damaged. Diagnose it with me step by step, fix what you can yourself, and tell me plainly when something needs a click from me.</pre>
   </div>
   <div class="deep forest">
     <h3>Still stuck?</h3>
